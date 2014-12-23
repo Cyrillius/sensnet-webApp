@@ -1,0 +1,82 @@
+
+
+
+
+<!DOCTYPE html>
+
+
+
+<html lang="fr">
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+    
+    <title>
+      Sensnet Tree Test
+    </title>
+    
+    <!--===================== CSS PART ===================================================================================================================== -->
+
+    <link href="style.css" rel="stylesheet">
+    
+
+  </head>
+  
+  <body>
+
+ <div id="content"></div>
+
+<!--===================== JS PART ===================================================================================================================== -->
+
+
+<script src="jquery-1.11.1.min.js"></script>
+<script src="underscore.js"></script>
+<script src="backbone.js"></script>
+
+
+
+
+<script src="backbone.marionette.js"></script>
+<script src="sensnet.js"></script>
+
+<script type="application/x-javascript">
+data = [
+    {
+    t: "Server 1",
+    devices: [
+        {
+        name: "Device 1",
+        sensors: [
+        	{name: "Sensor 1"}
+        ]}
+    ]},
+{
+    t: "Server 2",
+    devices: [
+        {
+        name: "Device 2",
+        sensors: [
+            {name: "Sensor 2"},
+        	{name: "Sensor 3"},
+        	{name: "Sensor 4"}
+        ]}
+    ]}
+
+];
+
+var servers = new Sensnet.Collections.ServerCollection(data);
+var tree = new Sensnet.Views.TreeView ({
+    collection: servers
+});
+
+tree.render();
+$("#sensnet").html(tree.el);
+
+
+</script>
+
+</body>
+</html>

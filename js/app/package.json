@@ -1,0 +1,20 @@
+{
+  "name": "Sensnet",
+  "version": "1.0.0",
+  "description": "Graphical User Interface to manage a bluetooth low energy network",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "sensnet"
+  ],
+  "author": "Cyril Praz",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-jsdoc": "^0.5.7"
+  }
+}

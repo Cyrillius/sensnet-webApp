@@ -1,0 +1,36 @@
+﻿<!-- Header Content -->
+<div class="sensnetHeader"></div>
+    
+<!-- Tree Content -->
+<div id="sensnetTree" class="col-sm-3 col-md-2">
+</div>
+
+<!-- Body Content -->
+<div id="sensnetBody" class="row col-md-8 col-md-offset-2">
+<p>Here is static content in the web page. This will replace by the Sensnet App</p>
+</div>
+
+<!-- Template Content -->
+<div id="sensnetTemplate">
+	<!--Welcome View template -->
+	<script id="welcome-template" type="text/template">
+		<p>Bienvenue sur l'interface graphique de Sensnet!<p>
+		<p>Pour commencer à utliser veuillez ajouter un serveur:<p>
+		<div id="inner-welcome"></div>
+	</script>
+
+	<!--Tree node template -->
+	<script id="node-template" type="text/template">
+		<li><%= name %></li>
+	</script>
+	<script id="server-profile" type="text/template">
+	<form>
+        <div><input name="name" type="text" value="<%= name %>"/></div>
+        <div><input name="ip" type="text" value="<%= ip %>"/></div>
+        <div><input name="port" type="text" value="<%= port %>"/></div>
+        <input class="save" type="button" value="Save"></input>
+	</form>
+	</script>
+</div>
+
+
