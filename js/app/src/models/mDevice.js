@@ -1,6 +1,15 @@
+ /**
+ *@file This file define the Device Model of the project 
+ *@author Cyril Praz
+ *@version V0.2
+ */
+
 (function(Backbone, Sensnet){
    /* Device Model */
  
+ 	/** 
+ 	 * @class Device Class 
+ 	 */
  	var Device = Backbone.Model.extend({
         initialize: function(){
           this.set({deviceId: this.cid,model: "device"});

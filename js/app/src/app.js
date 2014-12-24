@@ -1,3 +1,10 @@
+/**
+ *@file This file implement  the Application Class of the project 
+ *@author Cyril Praz
+ *@version V0.2
+ */
+
+
 /**     
 * @namespace Sensnet
 */
@@ -42,17 +49,19 @@ Sensnet.app.addInitializer(function(){
     
 });
 
+/* Handle some Events */
+
 Sensnet.app.on("start", function(){
 	
  	console.log("Sensnet App has started!");
-	 if (Backbone.history){
+	 if (Backbone.history){                             //when the application has started create a Router object
 	    Sensnet.app.router = new Sensnet.Router();
 	    Backbone.history.start({});
 	} 
 });
 Sensnet.app.on("onSuccess", function(msg){
 	
-	 $.jGrowl(msg, {
+	 $.jGrowl(msg, {                                   //display a notification when the event onSucess is triggered
 		theme: 'alert-success',
 		life: 4000 ,
 		animateOpen: {
@@ -60,7 +69,7 @@ Sensnet.app.on("onSuccess", function(msg){
 		}
 	});
 });
-Sensnet.app.on("onWarning", function(msg){
+Sensnet.app.on("onWarning", function(msg){            //display a notification when the event onWarning is triggered
 	
 	 $.jGrowl(msg, {
 		theme: 'alert-warning',
@@ -73,7 +82,7 @@ Sensnet.app.on("onWarning", function(msg){
 		}
 	});
 });
-Sensnet.app.on("onError", function(msg){
+Sensnet.app.on("onError", function(msg){              //display a notification when the event onError is triggered
 	
 	 $.jGrowl(msg, {
 		theme: 'alert-danger',
@@ -81,7 +90,7 @@ Sensnet.app.on("onError", function(msg){
 	});
 });
 
-
+/* initialize the javscript application when the page is loaded */
 $(function(){
 	$( '#content').load( "template/template.html",function(){Sensnet.app.start();} );
 });

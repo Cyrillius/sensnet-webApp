@@ -74,7 +74,9 @@ module.exports = function(grunt) {
       dist : {
         src: sensnet_App , 
         options: {
-          destination: 'doc'
+            destination: 'doc',
+			configure: './node_modules/jsdoc/conf.json',
+			template: './node_modules/ink-docstrap/template'
         }
       }
     }
