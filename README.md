@@ -141,6 +141,9 @@ Connection: keep-alive
 
 until the webpage is fully loaded.
 
+#### Websocket
+
+
 When the web page is fully loaded the browser will trig an event. This event will handle by a jquery and he will launch our javascript application.
 
 When a websocket server is added into our application the browser will send another http request but with more fields like here:
@@ -199,6 +202,17 @@ The list of events are :
 
 
 ####JSON
+
+Here is some JSON messages that you need to send. You can send more, the informations will be save into the object because the constructor of the object use a json variable.
+
+exemple: 
+
+```Javascript
+var device1 = new Device({"name":"My Device", "mac":"55: 44: 33: 22: 10"});
+```
+
+__an onInit message:__
+
 ```JSON
 {
 "event":"onInit",
@@ -267,6 +281,7 @@ The list of events are :
 } 
 
 ```
+__an onDeviceChange message:__
 
 ```JSON
 {
@@ -289,6 +304,7 @@ The list of events are :
     }
 }
 ```
+__an onSensorChange message:__
 
 ```JSON
 {
@@ -303,7 +319,6 @@ The list of events are :
 ```
 
 
-#### Websocket
 
 
 

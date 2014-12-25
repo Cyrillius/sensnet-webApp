@@ -17,11 +17,11 @@
 */
 
 
-var sensnet_App            = ['src/*.js'];
-var sensnet_Views          = ['src/views/vWelcome.js','src/views/*.js'];
-var sensnet_Collections    = ['src/collections/cSensors.js','src/collections/cDevices.js','src/collections/cServers.js']; //to be sure we don't have any dependency problem
-var sensnet_Factories      = ['src/factories/*.js'];
-var sensnet_Models         = ['src/models/*.js'];
+var sensnet_App            = ['js/app/src/*.js'];
+var sensnet_Views          = ['js/app/src/views/vWelcome.js','js/app/src/views/*.js'];
+var sensnet_Collections    = ['js/app/src/collections/cSensors.js','js/app/src/collections/cDevices.js','js/app/src/collections/cServers.js']; //to be sure we don't have any dependency problem
+var sensnet_Factories      = ['js/app/src/factories/*.js'];
+var sensnet_Models         = ['js/app/src/models/*.js'];
 
 sensnet_App = sensnet_App.concat(sensnet_Models, sensnet_Collections, sensnet_Views, sensnet_Factories );
 
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: sensnet_App , // la source
-        dest: 'dist/sensnet.js'// la destination finale
+        dest: 'js/app/dist/sensnet.js'// la destination finale
       },
 	    test: {
         src: sensnet_App , // la source
