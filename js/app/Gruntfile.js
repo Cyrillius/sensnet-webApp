@@ -72,7 +72,7 @@ module.exports = function(grunt) {
     },
 	  jsdoc: {
       dist : {
-        src: sensnet_App , 
+        src: sensnet_App.concat(['README.md']), 
         options: {
             destination: 'doc',
 			configure: './node_modules/jsdoc/conf.json',

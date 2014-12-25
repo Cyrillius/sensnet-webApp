@@ -1,8 +1,4 @@
-/**
- *@file This file define the Server Model of the project 
- *@author Cyril Praz
- *@version V0.2
- */
+
 
 (function(Backbone, Sensnet,console){ 
    /* Server Model */

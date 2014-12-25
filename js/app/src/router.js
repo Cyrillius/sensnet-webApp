@@ -1,15 +1,11 @@
-/**
- *@file This file define  the Router Class of the project 
- *@author Cyril Praz
- *@version V0.2
- */
+
 
 (function(Backbone, Sensnet){
 
   Sensnet.app.views = {};
   /**
-   * @class Router Class
-   * @description This class is used to handle the get made by the user
+   * This class is used to handle the get made by the user
+   * @class Router
    */
   var Router  = Backbone.Marionette.AppRouter.extend({
     routes: {
@@ -23,6 +19,8 @@
     
     /**
      * initialize and display the welcome view
+     * @public
+     * @memberof Router
      * @param null
      * @return null
      */
@@ -35,6 +33,8 @@
     
     /**
      * initialize and display the home view
+     * @public
+     * @memberof Router
      * @param null
      * @return null
      */
@@ -50,6 +50,8 @@
 	
 	 /**
      * display a server
+     * @public
+     * @memberof Router
      * @param serverId the id of the server
      * @return null
      */
@@ -63,6 +65,8 @@
     
      /**
      * display a device
+     * @public
+     * @memberof Router
      * @param deviceId the id of the device
      * @return null
      */
@@ -75,6 +79,8 @@
     
      /**
      * display a sensor
+     * @public
+     * @memberof Router
      * @param sensorId the id of the sensor
      * @return null
      */

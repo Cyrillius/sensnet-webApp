@@ -3,14 +3,14 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>DocStrap Index</title>
+	<title>Sensnet Index</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
 
-	<link type="text/css" rel="stylesheet" href="styles/site.journal.css">
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
 
 </head>
 
@@ -18,7 +18,7 @@
 <div class="container-fluid">
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="navbar-inner">
-			<a class="brand" href="index.html">DocStrap</a>
+			<a class="brand" href="index.html">Sensnet</a>
 			<ul class="nav">
 				
 				<li class="dropdown">
@@ -52,29 +52,17 @@
 				</li>
 				
 				<li class="dropdown">
-					<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b
+					<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b
 						class="caret"></b></a>
 
 					<ul class="dropdown-menu ">
 						
 						<li>
-							<a href="global.html#device">device</a>
+							<a href="Device.html">Device</a>
 						</li>
 						
 						<li>
-							<a href="global.html#home">home</a>
-						</li>
-						
-						<li>
-							<a href="global.html#sensor">sensor</a>
-						</li>
-						
-						<li>
-							<a href="global.html#server">server</a>
-						</li>
-						
-						<li>
-							<a href="global.html#welcome">welcome</a>
+							<a href="Router.html">Router</a>
 						</li>
 						
 
@@ -117,478 +105,256 @@
 
 
 
+    <section class="readme-section">
+        <article><h1>Sensnet Project</h1>
+<h3>Information</h3>
+<p>  A javascript web application used to manage a bluetooth low energy network. </p>
+<p>  This project is made by 4 students studying at the <strong>University of Applied Science  Western Switzerland in Industrial System Engineering</strong></p>
+<p>  This application used a websocket connection to communicate with a central Unit over internet and handle the events boadcasted by the system and display it in a webpage. </p>
+<p>  <strong>Project Master:</strong></p>
+<ul>
+<li>Medard Rieder</li>
+</ul>
+<p>  <strong>Contributor:</strong></p>
+<ul>
+<li>Patrice Rudaz</li>
+<li>Emilie Gsponer</li>
+</ul>
+<p>  <strong>Students:</strong></p>
+<ul>
+<li>Lucien Aymon </li>
+<li>Samantha Niyoyita</li>
+<li>Yann Maret</li>
+<li>Cyril Praz</li>
+</ul>
+<h3>Library Used</h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">URL</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">twitter bootstrap</td>
+<td align="left"><a href="http://getbootstrap.com">http://getbootstrap.com</a></td>
+<td align="left">html, css and js framework</td>
+</tr>
+<tr>
+<td align="left">jquery</td>
+<td align="left"><a href="http://jquery.com">http://jquery.com</a></td>
+<td align="left">javascript library to modify the DOM</td>
+</tr>
+<tr>
+<td align="left">backbone</td>
+<td align="left"><a href="http://backbonejs.org/">http://backbonejs.org/</a></td>
+<td align="left">javascipt framework to work with model</td>
+</tr>
+<tr>
+<td align="left">backbone marionette</td>
+<td align="left"><a href="http://marionettejs.com/">http://marionettejs.com/</a></td>
+<td align="left">common design and implementation patterns</td>
+</tr>
+</tbody>
+</table>
+<h3>Required</h3>
+<h4>to Use</h4>
+<p>  The libraries are already included into  the project, you need just have a modern browser supporting websocket. This project is tested with Google Chrome Version 39.0.2171.95 m and Firefox Version 34.0</p>
+<h4>to Develop</h4>
+<p>  This project use some tools from Node.js platform as Grunt a great javascript task runner you need to install node.js on your computer (<a href="http://nodejs.org/">http://nodejs.org/</a>)</p>
+<h3>Installation</h3>
+<ol>
+<li><p>Clone the repository :  </p>
+<pre><code class="lang-bash">git clone https://cyrillius@bitbucket.org/cyrillius/sensnet.git</code></pre>
+</li>
+<li><p>Select the development branch (if you want to contribute)</p>
+<pre><code class="lang-bash">git checkout dev</code></pre>
+</li>
+</ol>
+<h3>Getting Started</h3>
+<p> The main web page of the application is : <code>/sensnet/index.html</code></p>
+<h3>Grunt</h3>
+<p>Grunt is a javascript task runner (<a href="http://gruntjs.com/">http://gruntjs.com/</a>) . He is used into this project to generate sensnet.js and sensnet.min.js for the production. It also used to generate the documentation you are reading now.</p>
+<h4>Commands</h4>
+<p>to generate a sensnet.js with the annotation:</p>
+<pre><code>grunt dev</code></pre>
+<p>to generate a sensnet.min.js without the annotations and minified:</p>
+<pre><code>grunt prod</code></pre>
+<p>to generate the documentation:</p>
+<pre><code>grunt doc</code></pre>
+<h4>customize</h4>
+<p>to add some tasks you can modify <code>/sensnet/js/app/Gruntfile.js</code></p>
+<h3>Network</h3>
+<p>In a standard websocket application we need a web server  to get the web page and a websocket server to handle the bidirectional communication but we can bind this servers because the websocket handshake is in http. Into this project we bind this servers to have a compact and light weight web/websocket server and now we will explain we did this.</p>
+<h4>Http</h4>
+<p>When we want to display the web page and type <a href="http://sensnet.tk/">http://sensnet.tk/</a> into the browsers bar will send to the server some GET http request like this:</p>
+<pre><code>GET / HTTP/1.1
+Host: sensnet.tk
+Connection: keep-alive
+Authorization: Basic cGdhOlJhd3lsLTQ3
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4</code></pre>
+<p>and the server answer with this header followed by the data (here the html code index.html)</p>
+<pre><code>HTTP/1.1 200 OK
+Date: Wed, 24 Dec 2014 17:52:29 GMT
+Server: Apache
+Last-Modified: Sat, 20 Dec 2014 06:31:41 GMT
+ETag: &quot;f5183be-11cf-50a9ffa6bcd40&quot;
+Accept-Ranges: bytes
+Content-Length: 4559
+X-Powered-By: PleskLin
+Keep-Alive: timeout=5, max=8
+Connection: Keep-Alive
+Content-Type: text/html</code></pre>
+<p>Then the browser will loading the page and notice that there is some in other file like the style of the webisite is in this adress:  <a href="http://sensnet.tk/css/custom.css">http://sensnet.tk/css/custom.css</a>.
+He will send an other GET htttp request to have this file like here:</p>
+<pre><code>GET /sensnet-backbone/css/custom.css HTTP/1.1
+Host: sensnet.tk
+Connection: keep-alive
+...</code></pre>
+<p>until the webpage is fully loaded.</p>
+<p>When the web page is fully loaded the browser will trig an event. This event will handle by a jquery and he will launch our javascript application.</p>
+<p>When a websocket server is added into our application the browser will send another http request but with more fields like here:</p>
+<pre><code>GET ws://127.0.0.1:8080/ HTTP/1.1
+Host: 127.0.0.1:8080
+Connection: Upgrade
+Pragma: no-cache
+Cache-Control: no-cache
+Upgrade: websocket
+Origin: http://sensnet.tk
+Sec-WebSocket-Version: 13
+User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4
+Sec-WebSocket-Key: cCbtf+IoLcpep0CNZ32OGQ==
+Sec-WebSocket-Extensions: permessage-deflate; client_max_window_bits</code></pre>
+<p>The web/websocket server will see there is a field &quot;Upgrade: websocket&quot; and he will calculate the Sec-WebSocket-Accept key  with &quot;Sec-WebSocket-Key: cCbtf+IoLcpep0CNZ32OGQ==&quot;</p>
+<p>and upgrade his connection in tcp connection. (more info here: <a href="https://tools.ietf.org/html/rfc6455#section-4.2.1">https://tools.ietf.org/html/rfc6455#section-4.2.1</a>)</p>
+<p>finally he will answer with this header:</p>
+<pre><code>HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: DBWf9sgEU91cTkIxR/MXN+5dBcg=</code></pre>
+<p>The connection is now upgraded and the client or the server can send a websocket frame. Here you can see how is look like the websocket frame <a href="https://tools.ietf.org/html/rfc6455#section-5.2">https://tools.ietf.org/html/rfc6455#section-5.2</a> . </p>
+<p>There are two type of data frame:</p>
+<ul>
+<li>a binary websocket frame</li>
+<li>a text websocket frame</li>
+</ul>
+<p>Now a lot of application use a text websocket frame with JSON encoding. With this combination we can easily transmit the informations we want and debug. But yes there are a lot of useless bytes.</p>
+<p>In this project we use this to don't waste our time formatting data but maybe when we have some time we can translate this in binary.</p>
+<h4>Events</h4>
+<p>Our project is an asynchrone system it's not a real time system and we work with an event queue.</p>
+<p>Everything is broadcasted like this we are sure that everybody have the same content .</p>
+<p>The list of events are :</p>
+<ul>
+<li>onInit</li>
+<li>onDeviceChange</li>
+<li>onSensorChange</li>
+</ul>
+<h4>JSON</h4>
+<pre><code class="lang-JSON">{
+&quot;event&quot;:&quot;onInit&quot;,
+&quot;devices&quot;: [
+    {
+        &quot;mac&quot;: &quot;55: 44: 33: 22: 10&quot;,
+        &quot;sensors&quot;: [
+            {
+                &quot;type&quot;: &quot;temperature&quot;,
+                &quot;value&quot;: &quot;20&quot;,
+                &quot;port&quot;: 0
+            },
+            {
+                &quot;type&quot;: &quot;motion&quot;,
+                &quot;value&quot;: &quot;0&quot;,
+                &quot;port&quot;: 1
+            }
+        ]
+    },
+    {
+        &quot;mac&quot;: &quot;55: 44: 33: 22: 11&quot;,
+        &quot;sensors&quot;: [
+            {
+                &quot;type&quot;: &quot;temperature&quot;,
+                &quot;value&quot;: &quot;20&quot;,
+                &quot;port&quot;: 0
+            },
+            {
+                &quot;type&quot;: &quot;motion&quot;,
+                &quot;value&quot;: &quot;0&quot;,
+                &quot;port&quot;: 1
+            }
+        ]
+    },
+    {
+        &quot;mac&quot;: &quot;55: 44: 33: 22: 12&quot;,
+        &quot;sensors&quot;: [
+            {
+                &quot;type&quot;: &quot;temperature&quot;,
+                &quot;value&quot;: &quot;20&quot;,
+                &quot;port&quot;: 0,
+            },
+            {
+                &quot;type&quot;: &quot;motion&quot;,
+                &quot;value&quot;: &quot;0&quot;,
+                &quot;port&quot;: 1
+            }
+        ]
+    },
+    {
+        &quot;mac&quot;: &quot;55: 44: 33: 22: 13&quot;,
+        &quot;sensors&quot;: [
+            {
+                &quot;type&quot;: &quot;temperature&quot;,
+                &quot;value&quot;: &quot;20&quot;,
+                &quot;port&quot;: 0
+            },
+            {
+                &quot;type&quot;: &quot;motion&quot;,
+                &quot;value&quot;: &quot;0&quot;,
+                &quot;port&quot;: 1
+            }
+        ]
+    }
+    ]
+}</code></pre>
+<pre><code class="lang-JSON">{
+&quot;event&quot;:&quot;onDeviceChange&quot;,
+&quot;device&quot;: 
+         {
+        &quot;mac&quot;: &quot;55: 44: 33: 22: 1`0&quot;,
+        &quot;sensors&quot;: [
+            {
+                &quot;type&quot;: &quot;temperature&quot;,
+                &quot;value&quot;: &quot;20&quot;,
+                &quot;port&quot;: 0
+            },
+            {
+                &quot;type&quot;: &quot;motion&quot;,
+                &quot;value&quot;: &quot;1&quot;,
+                &quot;port&quot;: 1
+            }
+        ]
+    }
+}</code></pre>
+<pre><code class="lang-JSON">{
+&quot;event&quot;:&quot;onSensorChange&quot;,
+&quot;mac&quot;: &quot;55: 44: 33: 22: 10&quot;, 
+&quot;sensor&quot;: {
+    &quot;type&quot;: &quot;temperature&quot;,
+    &quot;value&quot;: &quot;20&quot;,
+    &quot;port&quot;: 0
+    }
+}</code></pre>
+<h4>Websocket</h4></article>
+    </section>
 
 
 
-
-
-
-
-	<h1 class="page-title">Index</h1>
-<section>
-
-<header>
-    <h2>
-    D:\Programmes\wamp\www\sensnet\js\app\src/app.js
-    </h2>
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-
-    
-        
-            <div class="description">This file implement  the Application Class of the project</div>
-        
-
-        
-<dl class="details">
-	
-
-	
-	<dt class="tag-version">Version:</dt>
-	<dd class="tag-version">
-		<ul class="dummy">
-			<li>V0.2</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-
-	
-	<dt class="tag-author">Author:</dt>
-	<dd class="tag-author">
-		<ul>
-			<li>Cyril Praz</li>
-			</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-
-	<h1 class="page-title">Index</h1>
-<section>
-
-<header>
-    <h2>
-    D:\Programmes\wamp\www\sensnet\js\app\src/router.js
-    </h2>
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-
-    
-        
-            <div class="description">This file define  the Router Class of the project</div>
-        
-
-        
-<dl class="details">
-	
-
-	
-	<dt class="tag-version">Version:</dt>
-	<dd class="tag-version">
-		<ul class="dummy">
-			<li>V0.2</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-
-	
-	<dt class="tag-author">Author:</dt>
-	<dd class="tag-author">
-		<ul>
-			<li>Cyril Praz</li>
-			</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-
-	<h1 class="page-title">Index</h1>
-<section>
-
-<header>
-    <h2>
-    models/mDevice.js
-    </h2>
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-
-    
-        
-            <div class="description">This file define the Device Model of the project</div>
-        
-
-        
-<dl class="details">
-	
-
-	
-	<dt class="tag-version">Version:</dt>
-	<dd class="tag-version">
-		<ul class="dummy">
-			<li>V0.2</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-
-	
-	<dt class="tag-author">Author:</dt>
-	<dd class="tag-author">
-		<ul>
-			<li>Cyril Praz</li>
-			</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-
-	<h1 class="page-title">Index</h1>
-<section>
-
-<header>
-    <h2>
-    models/mSensor.js
-    </h2>
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-
-    
-        
-            <div class="description">This file define the Sensor Model of the project</div>
-        
-
-        
-<dl class="details">
-	
-
-	
-	<dt class="tag-version">Version:</dt>
-	<dd class="tag-version">
-		<ul class="dummy">
-			<li>V0.2</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-
-	
-	<dt class="tag-author">Author:</dt>
-	<dd class="tag-author">
-		<ul>
-			<li>Cyril Praz</li>
-			</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-
-	<h1 class="page-title">Index</h1>
-<section>
-
-<header>
-    <h2>
-    models/mServer.js
-    </h2>
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-
-    
-        
-            <div class="description">This file define the Server Model of the project</div>
-        
-
-        
-<dl class="details">
-	
-
-	
-	<dt class="tag-version">Version:</dt>
-	<dd class="tag-version">
-		<ul class="dummy">
-			<li>V0.2</li>
-		</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-
-	
-	<dt class="tag-author">Author:</dt>
-	<dd class="tag-author">
-		<ul>
-			<li>Cyril Praz</li>
-			</ul>
-	</dd>
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
 
 
 
@@ -606,7 +372,7 @@
 					
 		<span class="jsdoc-message">
 		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a>
-		on 2014-12-24T02:58:08+01:00 using the <a
+		on 2014-12-25T02:22:04+01:00 using the <a
 			href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>

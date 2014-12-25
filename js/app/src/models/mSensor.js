@@ -1,8 +1,3 @@
- /**
- *@file This file define the Sensor Model of the project 
- *@author Cyril Praz
- *@version V0.2
- */
 
 (function(Backbone, Sensnet){ 
    /* Sensor Model */

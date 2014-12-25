@@ -1,8 +1,4 @@
-/**
- *@file This file implement  the Application Class of the project 
- *@author Cyril Praz
- *@version V0.2
- */
+
 
 
 /**     
