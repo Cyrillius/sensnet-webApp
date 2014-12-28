@@ -1,0 +1,71 @@
+
+
+//Files
+@icon-home : "../img/icons/home.png";
+@icon-server : "../img/icons/server.png";
+@icon-server-cast : "../img/icons/server-cast.png";
+@icon-server-exclamation : "../img/icons/server--exclamation.png";
+@icon-server-minus : "../img/icons/server--minus.png";
+@icon-server-plus : "../img/icons/server--plus.png";
+@icon-server-network : "../img/icons/server-network.png";
+@icon-server-pencil : "../img/icons/server--pencil.png";
+@icon-transmitter : "../img/icons/transmitter.png";
+@icon-drive : "../img/icons/drive.png";
+@icon-console : "../img/icons/application-terminal.png";
+@icon-linux : "../img/icons/animal-penguin.png";
+@icon-new : "../img/icons/new.png";
+@icon-status-on : "../img/icons/status.png";
+@icon-status-off : "../img/icons/status-busy.png";
+@icon-status-away : "../img/icons/status-away.png";
+@icon-server-offline : "../img/icons/status-offline.png";
+
+
+
+
+//Icons displayed in the beginning of the line
+
+.icons-line(){
+  background:top left no-repeat;
+  cursor:pointer;
+  display:block;
+  list-style:none;
+  padding:3px 20px;  
+}
+
+.home li{
+  .icons-line;
+  background-image: url(@icon-home);    
+}
+
+.server-add li{
+  .icons-line;
+  background-image: url(@icon-server-plus);    
+}
+
+.server li{
+  .icons-line;
+  background-image: url(@icon-server);    
+}
+
+.device li{
+  .icons-line;
+  background-image: url(@icon-transmitter);    
+}
+
+.sensor li{
+  .icons-line;
+  background-image: url(@icon-drive);    
+}
+
+//Icons displayed into a span
+
+.icons-span(){
+  padding:3px 16px;
+  background: center center no-repeat;   
+}
+
+.new {
+  .icons-span;
+  background-image: url(@icon-new );    
+}
+

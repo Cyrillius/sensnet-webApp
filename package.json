@@ -2,20 +2,39 @@
   "name": "Sensnet",
   "version": "1.0.0",
   "description": "Graphical User Interface to manage a bluetooth low energy network",
-  "main": "app.js",
+  "main": "index.html",
   "scripts": {
-    "test": "test"
+    "postinstall": "bower install"
   },
   "keywords": [
     "sensnet"
   ],
   "author": "Cyril Praz",
-  "license": "ISC",
   "devDependencies": {
+    "bower": "latest",
     "grunt": "^0.4.5",
-    "grunt-contrib-concat": "^0.5.0",
-    "grunt-contrib-uglify": "^0.6.0",
-    "grunt-jsdoc": "^0.5.7",
-    "ink-docstrap": "^0.4.12"
+    "grunt-bower-concat": "^0.4.0",
+    "grunt-bower-task": "latest",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-cssmin": "latest",
+    "grunt-contrib-jasmine": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-exec": "latest",
+    "grunt-jsdoc": "latest",
+    "grunt-karma": "latest",
+    "ink-docstrap": "latest",
+    "jasmine-core": "^2.1.3",
+    "karma": "~0.12.0",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-coverage": "^0.2.7",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-html-reporter": "^0.2.4",
+    "karma-htmlfile-reporter": "^0.1.2",
+    "karma-jasmine": "^0.2.0",
+    "karma-jasmine-html-reporter": "^0.1.5",
+    "karma-phantomjs-launcher": "latest"
   }
 }

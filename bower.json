@@ -1,0 +1,27 @@
+{
+  "name": "sensnet",
+  "version": "0.0.1",
+  "authors": [
+    "Cyril Praz <cyril.praz@students.hevs.ch>"
+  ],
+  "description": "Graphical User Interface to manage a bluetooth low energy network",
+  "main": "index.html",
+  "keywords": [
+    "sensnet"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "bootstrap": "~3.3.1",
+    "marionette": "~2.3.0",
+    "backbone": "~1.1.2",
+    "jgrowl": "~1.4.1"
+  }
+}

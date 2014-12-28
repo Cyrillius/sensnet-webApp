@@ -1,0 +1,40 @@
+@navbar-height : 50px;
+@title-height :  50px;
+
+body {
+  padding-top: (@navbar-height+@title-height+10px);
+}
+
+.navbar {
+    font-weight: 600;   
+}
+
+.title{
+	position: fixed;
+	left:0px;
+	right:0px;
+	top:(@navbar-height+1px);
+	height:@title-height;
+	text-align:center;
+	background-color:@gray;
+	font-size: 25px;
+	font-weight: 400;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.sidebar {
+    margin:0;
+    position: fixed;
+    top: 101px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color:@gray-lighter;
+    border-right: 1px solid #eee;
+    font:11px Arial, Helvetica, sans-serif; 
+}
