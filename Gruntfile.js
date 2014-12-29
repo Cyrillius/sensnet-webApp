@@ -22,11 +22,11 @@
 *
 */
 
-var sensnet_App            = ['js/app/src/*.js'];
-var sensnet_Views          = ['js/app/src/views/vWelcome.js', 'js/app/src/views/*.js'];
-var sensnet_Collections    = ['js/app/src/collections/cSensors.js', 'js/app/src/collections/cDevices.js', 'js/app/src/collections/cServers.js']; //to be sure we don't have any dependency problem
-var sensnet_Factories      = ['js/app/src/factories/*.js'];
-var sensnet_Models         = ['js/app/src/models/*.js'];
+var sensnet_App            = ['js/src/*.js'];
+var sensnet_Views          = ['js/src/views/vWelcome.js', 'js/src/views/*.js'];
+var sensnet_Collections    = ['js/src/collections/cSensors.js', 'js/src/collections/cDevices.js', 'js/src/collections/cServers.js']; //to be sure we don't have any dependency problem
+var sensnet_Factories      = ['js/src/factories/*.js'];
+var sensnet_Models         = ['js/src/models/*.js'];
 
 sensnet_App = sensnet_App.concat(sensnet_Models, sensnet_Collections, sensnet_Views, sensnet_Factories );
 
@@ -125,7 +125,10 @@ module.exports = function(grunt) {
         },
         exclude: [
          'bootstrap'
-        ]
+        ],
+        mainFiles: {
+          'jgrowl': ['jquery.jgrowl.min.js', 'jquery.jgrowl.min.css']
+        }
       }
     },
     less: {

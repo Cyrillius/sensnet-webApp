@@ -17,7 +17,7 @@
 *      #  #  #        #        #  #  #  #         ##   # ##   #    # ##   #       #    
 *      #  #   ##   ###          ##    ##          ##    # #  ###    # #  ###   ###     
 *                                                                                      
-* sensnet.js  V0.1  (2014-12-28, 18:10)       
+* sensnet.js  V0.1  (2014-12-29, 01:09)       
 *                                                                                      
 * Cyril Praz                                                                           
 */
@@ -458,7 +458,7 @@ Sensnet.Test.onInitMsg=onInitMsg;
 					console.log(data);
 					var e = this.get('devices').where({mac: data.mac});
 					if(e.length >=1){
-						var t = d[0].get('sensors').where({port:data.sensor.port});
+						var t = e[0].get('sensors').where({port:data.sensor.port});
 						if (t.length >=1){
 							t[0].set(data.sensor);
 						}
