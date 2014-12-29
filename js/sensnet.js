@@ -17,7 +17,7 @@
 *      #  #  #        #        #  #  #  #         ##   # ##   #    # ##   #       #    
 *      #  #   ##   ###          ##    ##          ##    # #  ###    # #  ###   ###     
 *                                                                                      
-* sensnet.js  V0.1  (2014-12-29, 01:09)       
+* sensnet.js  V0.1  (2014-12-29, 11:47)       
 *                                                                                      
 * Cyril Praz                                                                           
 */
@@ -128,9 +128,9 @@ $(function(){
     routes: {
     	'welcome' : 'welcome',
         'home' : 'home',
-        'servers/:serverId' : 'server',
-        'devices/:deviceId' : 'device',
-        'sensors/:sensorId' : 'sensor',
+        'server/:serverId' : 'server',
+        'device/:deviceId' : 'device',
+        'sensor/:sensorId' : 'sensor',
         '*actions' : 'welcome'
     },
     
@@ -149,20 +149,15 @@ $(function(){
     },
     
     /**
-     * initialize and display the home view
+     * display the home view
      * @public
      * @memberof Router
      * @param null
      * @return null
      */
     home: function() {
-    	var homeView = new Sensnet.Views.VServersTable({collection: Sensnet.app.servers});
-    	Sensnet.app.views.homeView = homeView; 
-    	Sensnet.app.body.show(homeView);  
-    	
-    	var treeView = new Sensnet.Views.TreeView ({collection: Sensnet.app.servers}); 
-    	Sensnet.app.views.treeView = treeView; 
-    	Sensnet.app.tree.show(treeView);
+    	Sensnet.app.body.displayHome(); 
+    	Sensnet.app.tree.displayTree();
     },
 	
 	 /**
@@ -173,7 +168,7 @@ $(function(){
      * @return null
      */
     server: function(serverId) {
-    	Sensnet.app.side.displayTree();
+    	Sensnet.app.tree.displayTree();
     	var serverBody = Sensnet.Factories.Server.serverBody(serverId);
     	Sensnet.app.body.show(serverBody);
     	
@@ -188,7 +183,7 @@ $(function(){
      * @return null
      */
     device: function(deviceId) {
-    	Sensnet.app.side.displayTree();
+    	Sensnet.app.tree.displayTree();
     	var deviceBody = Sensnet.Factories.Device.deviceBody(deviceId);
     	Sensnet.app.body.show(deviceBody);
     	
@@ -202,7 +197,7 @@ $(function(){
      * @return null
      */
     sensor: function(sensorId) {
-     	Sensnet.app.side.displayTree();
+     	Sensnet.app.tree.displayTree();
     	var sensorBody = Sensnet.Factories.Device.deviceBody(sensorId);
     	Sensnet.app.body.show(sensorBody);  	
     }  
@@ -399,7 +394,6 @@ Sensnet.Test.onInitMsg=onInitMsg;
 
         toJSON: function(){
             var attr = Backbone.Model.prototype.toJSON.call(this);
-
 			attr.name = this.get('name');
             attr.ip = this.get('ip');
             attr.port = this.get('port');
@@ -430,6 +424,7 @@ Sensnet.Test.onInitMsg=onInitMsg;
 			console.log("socketError");
 			Sensnet.app.trigger('onError', "An Error has just happen with "+this.addr+" !");
 			this.trigger("onConnectionFailed");
+			this.set("status","error");
 		},
         socketMessage: function(data){
 			switch(data.event){
@@ -437,9 +432,6 @@ Sensnet.Test.onInitMsg=onInitMsg;
 					console.log(data);
 					var col = new Sensnet.Collections.DeviceCollection(data.devices);
 					this.set("devices",col);
-					//var treeView = new Sensnet.Views.TreeView ({collection: Sensnet.app.servers});  
-    				//Sensnet.app.tree.show(treeView);
-
 				break;
 				case "onDeviceChange":
 					console.log(data);
@@ -451,8 +443,7 @@ Sensnet.Test.onInitMsg=onInitMsg;
 							s[0].set(data.device.sensors[0]);
 							s[1].set(data.device.sensors[1]);
 						}
-					}
-					
+					}		
 				break;
 				case "onSensorChange":
 					console.log(data);
@@ -463,7 +454,6 @@ Sensnet.Test.onInitMsg=onInitMsg;
 							t[0].set(data.sensor);
 						}
 					}
-
 				break;
 			}
 		}
@@ -736,8 +726,9 @@ var ServersViewTree =  Backbone.Marionette.CompositeView.extend({
     },
     displayServer: function(){
      	console.log("BOUM3!!!");
-    	var serverView = new Sensnet.Views.VServerTable({model:this.model});
-    	Sensnet.app.body.show(serverView);     	
+     	Sensnet.app.router.navigate("server/"+this.model.get("cid"));
+    	//var serverView = new Sensnet.Views.VServerTable({model:this.model});
+    	//Sensnet.app.body.show(serverView);     	
     },
     removeServer: function(){
     	
@@ -804,6 +795,8 @@ Sensnet.Factories.Connection = {
 
 })(Backbone, _, Sensnet);
 // ===================================================
+
+// ===================================================
 (function(jQuery, $){
 	
 jQuery.fn.serializeObject = function() {
@@ -833,5 +826,41 @@ return objectData;
 })(jQuery, $);
 
 // ===================================================
+(function(Backbone, _, Sensnet){
+Sensnet.Factories.Home = {
+	homeSide: function (){
+		var treeView = new Sensnet.Views.TreeView ({collection: Sensnet.app.servers}); 
+    	Sensnet.app.views.treeView = treeView; 
+    	return treeView;
+	},
+	homeBody: function(){
+	    var homeView = new Sensnet.Views.VServersTable({collection: Sensnet.app.servers});
+    	Sensnet.app.views.homeView = homeView; 
+		return homeView;
+	}	
+};
 
+Sensnet.app.tree.displayTree = function(){ Sensnet.app.tree.show(Sensnet.Factories.Home.homeSide());};
+Sensnet.app.body.displayHome = function(){ Sensnet.app.body.show(Sensnet.Factories.Home.homeBody());};
+
+
+})(Backbone, _, Sensnet);
+// ===================================================
+
+// ===================================================
+(function(Backbone, _, Sensnet){
+Sensnet.Factories.Server = {
+	serverBody: function(id){	
+		var model = Sensnet.app.servers.get(id); 
+	    var serverView = new Sensnet.Views.VServerTable({model:model});
+		return serverView;
+	},	
+    addServerForm: function(){
+	    var homeView = new Sensnet.Views.VServersTable({collection: Sensnet.app.servers});
+    	Sensnet.app.views.homeView = homeView; 
+		return homeView;
+	}	
+};
+
+})(Backbone, _, Sensnet);
 // ===================================================

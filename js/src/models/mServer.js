@@ -31,7 +31,6 @@
 
         toJSON: function(){
             var attr = Backbone.Model.prototype.toJSON.call(this);
-
 			attr.name = this.get('name');
             attr.ip = this.get('ip');
             attr.port = this.get('port');
@@ -62,6 +61,7 @@
 			console.log("socketError");
 			Sensnet.app.trigger('onError', "An Error has just happen with "+this.addr+" !");
 			this.trigger("onConnectionFailed");
+			this.set("status","error");
 		},
         socketMessage: function(data){
 			switch(data.event){
@@ -69,9 +69,6 @@
 					console.log(data);
 					var col = new Sensnet.Collections.DeviceCollection(data.devices);
 					this.set("devices",col);
-					//var treeView = new Sensnet.Views.TreeView ({collection: Sensnet.app.servers});  
-    				//Sensnet.app.tree.show(treeView);
-
 				break;
 				case "onDeviceChange":
 					console.log(data);
@@ -83,8 +80,7 @@
 							s[0].set(data.device.sensors[0]);
 							s[1].set(data.device.sensors[1]);
 						}
-					}
-					
+					}		
 				break;
 				case "onSensorChange":
 					console.log(data);
@@ -95,7 +91,6 @@
 							t[0].set(data.sensor);
 						}
 					}
-
 				break;
 			}
 		}

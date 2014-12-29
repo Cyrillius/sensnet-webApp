@@ -97,8 +97,9 @@ var ServersViewTree =  Backbone.Marionette.CompositeView.extend({
     },
     displayServer: function(){
      	console.log("BOUM3!!!");
-    	var serverView = new Sensnet.Views.VServerTable({model:this.model});
-    	Sensnet.app.body.show(serverView);     	
+     	Sensnet.app.router.navigate("server/"+this.model.get("cid"));
+    	//var serverView = new Sensnet.Views.VServerTable({model:this.model});
+    	//Sensnet.app.body.show(serverView);     	
     },
     removeServer: function(){
     	

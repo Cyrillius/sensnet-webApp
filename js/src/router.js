@@ -11,9 +11,9 @@
     routes: {
     	'welcome' : 'welcome',
         'home' : 'home',
-        'servers/:serverId' : 'server',
-        'devices/:deviceId' : 'device',
-        'sensors/:sensorId' : 'sensor',
+        'server/:serverId' : 'server',
+        'device/:deviceId' : 'device',
+        'sensor/:sensorId' : 'sensor',
         '*actions' : 'welcome'
     },
     
@@ -32,20 +32,15 @@
     },
     
     /**
-     * initialize and display the home view
+     * display the home view
      * @public
      * @memberof Router
      * @param null
      * @return null
      */
     home: function() {
-    	var homeView = new Sensnet.Views.VServersTable({collection: Sensnet.app.servers});
-    	Sensnet.app.views.homeView = homeView; 
-    	Sensnet.app.body.show(homeView);  
-    	
-    	var treeView = new Sensnet.Views.TreeView ({collection: Sensnet.app.servers}); 
-    	Sensnet.app.views.treeView = treeView; 
-    	Sensnet.app.tree.show(treeView);
+    	Sensnet.app.body.displayHome(); 
+    	Sensnet.app.tree.displayTree();
     },
 	
 	 /**
@@ -56,7 +51,7 @@
      * @return null
      */
     server: function(serverId) {
-    	Sensnet.app.side.displayTree();
+    	Sensnet.app.tree.displayTree();
     	var serverBody = Sensnet.Factories.Server.serverBody(serverId);
     	Sensnet.app.body.show(serverBody);
     	
@@ -71,7 +66,7 @@
      * @return null
      */
     device: function(deviceId) {
-    	Sensnet.app.side.displayTree();
+    	Sensnet.app.tree.displayTree();
     	var deviceBody = Sensnet.Factories.Device.deviceBody(deviceId);
     	Sensnet.app.body.show(deviceBody);
     	
@@ -85,7 +80,7 @@
      * @return null
      */
     sensor: function(sensorId) {
-     	Sensnet.app.side.displayTree();
+     	Sensnet.app.tree.displayTree();
     	var sensorBody = Sensnet.Factories.Device.deviceBody(sensorId);
     	Sensnet.app.body.show(sensorBody);  	
     }  
