@@ -13,10 +13,7 @@ var SensorsViewTree = Backbone.Marionette.ItemView.extend({
     tagName: "ul",
     className:"tree sensor",
     displaySensor: function(){
-    	console.log("BOUM1!!!");
-    	var sensorView = new Sensnet.Views.VSensorTable({model:this.model});
-    	Sensnet.app.body.show(sensorView);  
-    	
+    	Sensnet.app.router.navigate(this.model.get("url"),{trigger:true}); 	
     },
     removeSensor: function(){
     	
@@ -60,8 +57,7 @@ var DevicesViewTree =  Backbone.Marionette.CompositeView.extend({
     },
     displayDevice: function(){
     	console.log("BOUM2!!!");
-    	var deviceView = new Sensnet.Views.VDeviceTable({model:this.model});
-    	Sensnet.app.body.show(deviceView);      	
+    	Sensnet.app.router.navigate(this.model.get("url"),{trigger:true});     	
     },
     removeDevice: function(){
     	
@@ -96,10 +92,7 @@ var ServersViewTree =  Backbone.Marionette.CompositeView.extend({
         collectionView.$("li:first").append(itemView.el);
     },
     displayServer: function(){
-     	console.log("BOUM3!!!");
-     	Sensnet.app.router.navigate("server/"+this.model.get("cid"));
-    	//var serverView = new Sensnet.Views.VServerTable({model:this.model});
-    	//Sensnet.app.body.show(serverView);     	
+     	Sensnet.app.router.navigate(this.model.get("url"),{trigger:true}); 	
     },
     removeServer: function(){
     	
@@ -114,12 +107,23 @@ Sensnet.Views.ServersViewTree = ServersViewTree;
 
 
 
-var TreeView = Backbone.Marionette.CollectionView.extend({
+var TreeView = Backbone.Marionette.CompositeView.extend({
+	template: "#tree-template",	
     childView: Sensnet.Views.ServersViewTree,
    	collectionEvents: {
    		'change' : 'render',
     	"sync": "render"
-   	}
+   	},
+   	events: {
+        'click .display.home': 'displayHome',
+		'click .display.server-add': 'displayAddServer'
+    },
+    displayHome: function(){
+     	Sensnet.app.router.navigate("home",{trigger:true}); 	
+    },
+    displayAddServer: function(){
+     	Sensnet.app.router.navigate("addServer",{trigger:true}); 	
+    },
 });
 
 Sensnet.Views.TreeView = TreeView;

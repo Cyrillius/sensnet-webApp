@@ -13,8 +13,10 @@
           this.set({name: 'Server '+this.get('serverId')});
           var devices = this.get("devices");
           if (!devices){
-             this.set("devices", new Sensnet.Collections.DeviceCollection());
+          	var coll = new Sensnet.Collections.DeviceCollection(devices);
+            this.set("devices",coll);
           }
+          this.setUrl('server/'+this.get('serverId'));
         },
 
         idAttribute: 'serverId',
@@ -28,6 +30,14 @@
         },
 
         urlRoot: '/sensnet/servers/',
+        
+        setUrl: function(url){
+        	this.set({"url":url});
+        	var col = this.get("devices");
+          	col.forEach(function(model) {
+    		   model.setUrl(url+"/device/"+model.get("deviceId"));
+			});
+        },
 
         toJSON: function(){
             var attr = Backbone.Model.prototype.toJSON.call(this);
@@ -69,6 +79,7 @@
 					console.log(data);
 					var col = new Sensnet.Collections.DeviceCollection(data.devices);
 					this.set("devices",col);
+					this.setUrl('server/'+this.get('serverId'));
 				break;
 				case "onDeviceChange":
 					console.log(data);
@@ -76,7 +87,7 @@
 					if(d.length >=1){
 						d[0].set( {mac: data.device.mac});
 						var s = d[0].get('sensors').models;
-						if(s.length >=1){
+						if(s.length >=2){
 							s[0].set(data.device.sensors[0]);
 							s[1].set(data.device.sensors[1]);
 						}

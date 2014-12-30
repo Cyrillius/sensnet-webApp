@@ -28,7 +28,7 @@ var VServerProfile = Marionette.ItemView.extend({
 		var port = $('#serverPort').val();
 		var model = Sensnet.app.servers.findWhere({ "ip": ip, "port": port });
 		if(model !== null && model !== undefined){
-			this.model.destroy();
+			this.model.trigger("destroy");
 			this.model = model;
 			model.set({"name":name});			
 		}
@@ -43,7 +43,7 @@ var VServerProfile = Marionette.ItemView.extend({
 			Sensnet.app.router.navigate('home', {trigger: true});
 		});
         model.on("onConnectionFailed", function(){
-			model.destroy();
+			model.trigger("destroy");
 		});
 	}
 });

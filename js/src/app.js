@@ -52,7 +52,7 @@ Sensnet.app.on("start", function(){
  	console.log("Sensnet App has started!");
 	 if (Backbone.history){                             //when the application has started create a Router object
 	    Sensnet.app.router = new Sensnet.Router();
-	    Backbone.history.start({});
+	    Backbone.history.start();
 	} 
 });
 Sensnet.app.on("onSuccess", function(msg){

@@ -14,3 +14,9 @@ var VDeviceTable = Marionette.ItemView.extend({
 });
 
 Sensnet.Views.VDeviceTable= VDeviceTable;
+
+var VDevicesTable = Backbone.Marionette.CollectionView.extend({
+    childView: Sensnet.Views.VDeviceTable
+});
+
+Sensnet.Views.VDevicesTable= VDevicesTable;

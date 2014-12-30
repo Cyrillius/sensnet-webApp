@@ -14,3 +14,9 @@ var VSensorTable = Marionette.ItemView.extend({
 });
 
 Sensnet.Views.VSensorTable= VSensorTable;
+
+var VSensorsTable = Backbone.Marionette.CollectionView.extend({
+    childView: Sensnet.Views.VSensorTable
+});
+
+Sensnet.Views.VSensorsTable= VSensorsTable;

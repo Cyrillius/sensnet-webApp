@@ -9,12 +9,16 @@
    */
   var Router  = Backbone.Marionette.AppRouter.extend({
     routes: {
-    	'welcome' : 'welcome',
-        'home' : 'home',
-        'server/:serverId' : 'server',
-        'device/:deviceId' : 'device',
-        'sensor/:sensorId' : 'sensor',
-        '*actions' : 'welcome'
+    	'welcome' :                                               'welcome',
+        'home' :                                                  'home',
+        'addServer' :                                             'addServer',
+        'server/:serverId' :                                      'server',
+        'server/:serverId/device/:deviceId' :                     'device',
+        'server/:serverId/device/:deviceId/sensor/:sensorId' :    'sensor',
+        'servers' :                                               'servers',
+        'server/:serverId/devices' :                              'devices',
+        'server/:serverId/device/:deviceId/sensors' :             'sensors',
+        '*actions' :                                              'welcome'
     },
     
     /**
@@ -25,10 +29,7 @@
      * @return null
      */
     welcome: function() {
-    	var welcomeView = new Sensnet.Views.WelcomeView();
-    	Sensnet.app.body.show(welcomeView);
-    	var addServerView = new Sensnet.Views.VServerProfile();   
-    	welcomeView.innerWelcome.show(addServerView);
+    	Sensnet.app.body.displayWelcome(); 
     },
     
     /**
@@ -41,6 +42,19 @@
     home: function() {
     	Sensnet.app.body.displayHome(); 
     	Sensnet.app.tree.displayTree();
+    },
+    
+    /**
+     * display the form to add a server
+     * @public
+     * @memberof Router
+     * @param null
+     * @return null
+     */
+    addServer: function() { 
+    	Sensnet.app.tree.displayTree();
+    	var addServerBody = Sensnet.Factories.Server.addServerForm();
+    	Sensnet.app.body.show(addServerBody);
     },
 	
 	 /**
@@ -65,9 +79,10 @@
      * @param deviceId the id of the device
      * @return null
      */
-    device: function(deviceId) {
+    device: function(serverId, deviceId) {
+    	console.log("navigate to the device! Bitch!");
     	Sensnet.app.tree.displayTree();
-    	var deviceBody = Sensnet.Factories.Device.deviceBody(deviceId);
+    	var deviceBody = Sensnet.Factories.Device.deviceBody(serverId, deviceId);
     	Sensnet.app.body.show(deviceBody);
     	
     },	
@@ -79,10 +94,52 @@
      * @param sensorId the id of the sensor
      * @return null
      */
-    sensor: function(sensorId) {
+    sensor: function(serverId, deviceId, sensorId) {
      	Sensnet.app.tree.displayTree();
-    	var sensorBody = Sensnet.Factories.Device.deviceBody(sensorId);
+    	var sensorBody = Sensnet.Factories.Sensor.sensorBody(serverId, deviceId, sensorId);
     	Sensnet.app.body.show(sensorBody);  	
+    },  
+    
+	 /**
+     * display a list of servers
+     * @public
+     * @memberof Router
+     * @param serverId the id of the server
+     * @return null
+     */
+    servers: function() {
+    	Sensnet.app.tree.displayTree();
+    	var serversBody = Sensnet.Factories.Server.serversBody();
+    	Sensnet.app.body.show(serversBody);
+    	
+    },
+    
+    
+     /**
+     * display a list of devices
+     * @public
+     * @memberof Router
+     * @param deviceId the id of the device
+     * @return null
+     */
+    devices: function(serverId) {
+    	Sensnet.app.tree.displayTree();
+    	var devicesBody = Sensnet.Factories.Device.devicesBody(serverId);
+    	Sensnet.app.body.show(devicesBody);
+    	
+    },	
+    
+     /**
+     * display a list of sensors
+     * @public
+     * @memberof Router
+     * @param sensorId the id of the sensor
+     * @return null
+     */
+    sensors: function(serverId, deviceId) {
+     	Sensnet.app.tree.displayTree();
+    	var sensorsBody = Sensnet.Factories.Sensor.sensorsBody(serverId, deviceId);
+    	Sensnet.app.body.show(sensorsBody);  	
     }  
        
     });

@@ -23,6 +23,10 @@
         },
 
         urlRoot: '/sensnet/sensors/',
+        
+        setUrl: function(url){
+        	this.set({"url":url});
+        },
 
         toJSON: function(){
             var attr = Backbone.Model.prototype.toJSON.call(this);

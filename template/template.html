@@ -3,12 +3,6 @@
     
 <!-- Tree Content -->
 <div id="sensnetTree" class="col-sm-3 col-md-3 sidebar">
-	<ul class="tree home">
-    <li class="display home ">Home<span></span></li>
-  </ul>
-	<ul class="tree server-add">
-    <li class="display server-add">Add Server<span></span></li>
-  </ul>
 </div>
 
 <!-- Body Content -->
@@ -26,6 +20,14 @@
 	</script>
 
 	<!--Tree node template -->
+	<script id="tree-template" type="text/template">
+		<ul class="tree home">
+    		<li class="display home ">Home<span></span></li>
+  		</ul>
+		<ul class="tree server-add">
+    		<li class="display server-add">Add Server<span></span></li>
+  		</ul>
+	</script>
 	<script id="node-template" type="text/template">
 		<li class = "display <%= model %> "><%= name %><span></span></li>
 	</script>
