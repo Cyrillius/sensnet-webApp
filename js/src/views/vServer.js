@@ -28,7 +28,7 @@ var VServerProfile = Marionette.ItemView.extend({
 		var port = $('#serverPort').val();
 		var model = Sensnet.app.servers.findWhere({ "ip": ip, "port": port });
 		if(model !== null && model !== undefined){
-			this.model.trigger("destroy");
+			this.model.trigger("destroy",this.model);
 			this.model = model;
 			model.set({"name":name});			
 		}
@@ -43,7 +43,7 @@ var VServerProfile = Marionette.ItemView.extend({
 			Sensnet.app.router.navigate('home', {trigger: true});
 		});
         model.on("onConnectionFailed", function(){
-			model.trigger("destroy");
+			model.trigger("destroy",this.model);
 		});
 	}
 });
@@ -58,10 +58,16 @@ var VServerTable = Marionette.ItemView.extend({
 		'change' : 'render',
 		'sync' : 'render'
 	},
+	events: {
+        'click .delete-server': 'deleteServer'
+    },
 
 	onRender : function() {
 		console.log("table was rendered");
 	},
+	deleteServer: function(){
+		this.model.trigger("destroy",this.model);
+	}
 
 });
 
