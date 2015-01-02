@@ -17,7 +17,7 @@
 *      #  #  #        #        #  #  #  #         ##   # ##   #    # ##   #       #    
 *      #  #   ##   ###          ##    ##          ##    # #  ###    # #  ###   ###     
 *                                                                                      
-* sensnet.js  V0.1  (2014-12-30, 02:24)       
+* sensnet.js  V0.1  (2015-01-02, 23:52)       
 *                                                                                      
 * Cyril Praz                                                                           
 */
@@ -483,18 +483,18 @@ Sensnet.Test.onInitMsg=onInitMsg;
         },
         initSocket: function(){
         	this.addr = "ws://"+this.get("ip")+":"+this.get("port");
-        	this.stream = Sensnet.Factories.Connection.websocket(this.addr);
-        	this.stream.on('socket_open',this.socketOpen,this); 
-        	this.stream.on('socket_close',this.socketClose,this); 
-        	this.stream.on('socket_error',this.socketError,this); 
-        	this.stream.on('socket_message',this.socketMessage,this); 
+        	this.stream = Sensnet.Factories.Connection.websocket(this, this.addr);
+        	this.on('socket_open',this.socketOpen,this); 
+        	this.on('socket_close',this.socketClose,this); 
+        	this.on('socket_error',this.socketError,this); 
+        	this.on('socket_message',this.socketMessage,this); 
         },
         socketOpen: function(e){
 			console.log("socketOpen");
 			Sensnet.app.trigger('onSuccess', "The connection with "+this.addr+" is now open");
 			this.trigger("onConnectionSuccess");
 			this.set("status","connected");
-			this.stream.socket.send(JSON.stringify(Sensnet.Test.onInitMsg));
+			this.stream.send(JSON.stringify(Sensnet.Test.onInitMsg));
 		},
         socketClose: function(e){
 			console.log("socketClose");
@@ -859,35 +859,33 @@ Sensnet.Views.TreeView = TreeView;
 (function(Backbone, _, Sensnet){
 
 Sensnet.Factories.Connection = {
-	websocket: function(addr){
-		 this.addr = addr;
-        _.extend(this, Backbone.Events);
-  		 var self = this;
-  
+	websocket: function(model,addr){
+		var socket;
+
         if (typeof(WebSocket) !== 'undefined') {
           console.log("Using a standard websocket");
-          self.socket = new WebSocket(this.addr);
+          socket = new WebSocket(addr);
         } else if (typeof(MozWebSocket) !== 'undefined') {
           console.log("Using MozWebSocket");
-          self.socket = new MozWebSocket(this.addr);
+          socket = new MozWebSocket(addr);
         } else {
           alert("Your browser does not support web sockets. No stats for you!");
         }
       
-        self.socket.onopen = function (e) {
-          self.trigger('socket_open', e);
+        socket.onopen = function (e) {
+          model.trigger('socket_open', e);
         };
-        self.socket.onmessage = function (e) {
-          self.trigger('socket_message', JSON.parse(e.data));
+        socket.onmessage = function (e) {
+          model.trigger('socket_message', JSON.parse(e.data));
         };
       
-        self.socket.onclose = function (e) {
-          self.trigger('socket_close', e);
+        socket.onclose = function (e) {
+          model.trigger('socket_close', e);
         };
-        self.socket.onerror = function (e) {
-          self.trigger('socket_error', e);
+        socket.onerror = function (e) {
+          model.trigger('socket_error', e);
         };
-        return this;
+        return socket;
 	}
 
 };

@@ -49,18 +49,18 @@
         },
         initSocket: function(){
         	this.addr = "ws://"+this.get("ip")+":"+this.get("port");
-        	this.stream = Sensnet.Factories.Connection.websocket(this.addr);
-        	this.stream.on('socket_open',this.socketOpen,this); 
-        	this.stream.on('socket_close',this.socketClose,this); 
-        	this.stream.on('socket_error',this.socketError,this); 
-        	this.stream.on('socket_message',this.socketMessage,this); 
+        	this.stream = Sensnet.Factories.Connection.websocket(this, this.addr);
+        	this.on('socket_open',this.socketOpen,this); 
+        	this.on('socket_close',this.socketClose,this); 
+        	this.on('socket_error',this.socketError,this); 
+        	this.on('socket_message',this.socketMessage,this); 
         },
         socketOpen: function(e){
 			console.log("socketOpen");
 			Sensnet.app.trigger('onSuccess', "The connection with "+this.addr+" is now open");
 			this.trigger("onConnectionSuccess");
 			this.set("status","connected");
-			this.stream.socket.send(JSON.stringify(Sensnet.Test.onInitMsg));
+			this.stream.send(JSON.stringify(Sensnet.Test.onInitMsg));
 		},
         socketClose: function(e){
 			console.log("socketClose");
