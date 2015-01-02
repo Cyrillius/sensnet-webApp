@@ -53,7 +53,7 @@ NAVIGATION BAR
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="menu-home">
-              <a href="#" class ="active" >
+              <a href="../index.html" class ="active" >
                 Home
               </a>
             </li>
@@ -78,42 +78,16 @@ Home View
 **********************************************************-->
 	
     <div class="container-fluid">
-      <div class="sensnetHeader title">Test Panel</div>
-      Chrome 39.0.2171 (Windows 8)
+
+      <h1>PhantomJS 1.9.8 (Windows 8)</h1>
       <ul>
         <li>
-          <a href="../coverage/Chrome 39.0.2171 (Windows 8)/index.html" class ="active" >
+          <a href="coverage/PhantomJS 1.9.8 (Windows 8)/index.html" class ="active" >
             Tests Coverage
           </a>
         </li>
         <li>
-          <a href="Chrome 39.0.2171 (Windows 8)/index.html">
-            Tests Results
-          </a>
-        </li>
-      </ul>
-      Firefox 34.0.0 (Windows 8)
-      <ul>
-        <li>
-          <a href="../coverage/Firefox 34.0.0 (Windows 8)/index.html" class ="active" >
-            Tests Coverage
-          </a>
-        </li>
-        <li>
-          <a href="Firefox 34.0.0 (Windows 8)/index.html">
-            Tests Results
-          </a>
-        </li>
-      </ul>
-      PhantomJS 1.9.8 (Windows 8)
-      <ul>
-        <li>
-          <a href="../coverage/PhantomJS 1.9.8 (Windows 8)/index.html" class ="active" >
-            Tests Coverage
-          </a>
-        </li>
-        <li>
-          <a href="PhantomJS 1.9.8 (Windows 8)/index.html">
+          <a href="testsResult/PhantomJS 1.9.8 (Windows 8)/index.html">
             Tests Results
           </a>
         </li>

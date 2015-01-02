@@ -1,0 +1,15 @@
+{
+  "name": "sensnet-test-server",
+  "version": "1.0.0",
+  "description": "some server to test the web application",
+  "main": "server1.js",
+  "dependencies": {
+    "websocket": "^1.0.14",
+    "websocketserver": "^1.0.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "sensnet"
+  ],
+  "author": "cyril praz"
+}
