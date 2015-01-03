@@ -1,6 +1,6 @@
 # Sensnet Project 
 
-  ### Information 
+### Information 
 
   A javascript web application used to manage a bluetooth low energy network. 
 
@@ -28,7 +28,7 @@
   - Cyril Praz
 
 
-  ### Library Used
+### Library Used
 
  |          Name               |          URL                     |       Description                                     |
  | :-------------------------- | :------------------------------- | :--------------------------------------------------   |
@@ -37,18 +37,18 @@
  |    backbone                 |   http://backbonejs.org/         |   javascipt framework to work with model              |
  |    backbone marionette      |   http://marionettejs.com/       |   common design and implementation patterns           |
 
-  ### Required 
+### Required 
 
   #### to Use
 
   The libraries are already included into  the project, you need just have a modern browser supporting websocket. This project is tested with Google Chrome Version 39.0.2171.95 m and Firefox Version 34.0
 
-  #### to Develop
+#### to Develop
 
   This project use some tools from Node.js platform as Grunt a great javascript task runner you need to install node.js on your computer (http://nodejs.org/)
 
 
-  ### Installation 
+### Installation 
 
   1. Clone the repository :  
 
@@ -63,12 +63,12 @@
   ```  
 
 
- ### Getting Started 
+### Getting Started 
 
  The main web page of the application is : `/sensnet/index.html`
 
 
- ### Grunt
+### Grunt
 
 Grunt is a javascript task runner (http://gruntjs.com/) . He is used into this project to generate sensnet.js and sensnet.min.js for the production. It also used to generate the documentation you are reading now.
 
