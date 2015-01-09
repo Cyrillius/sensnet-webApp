@@ -109,7 +109,7 @@ module.exports = function(grunt) {
         src: "<%= src.input.sensnet.doc %>", 
         options: {
           destination: "<%= src.output.sensnet.doc %>",
-			    configure: './node_modules/jsdoc/conf.json',
+			    configure: './jsdoc.conf.json',
 			    template: './node_modules/ink-docstrap/template'
         }
       }

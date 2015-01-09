@@ -199,7 +199,7 @@
     <h1>Code coverage report for <span class="entity">./js/src/factories/fConnection.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">9.52% <small>(2 / 21)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">10.53% <small>(2 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Branches: <span class="metric">0% <small>(0 / 4)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -208,7 +208,7 @@
         Functions: <span class="metric">16.67% <small>(1 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">9.52% <small>(2 / 21)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">10.53% <small>(2 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -250,14 +250,10 @@
 32
 33
 34
-35
-36
-37</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+35</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -291,35 +287,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function(Backbone, _, Sensnet){
 &nbsp;
 Sensnet.Factories.Connection = {
-	websocket: <span class="fstat-no" title="function not covered" >function(addr){</span>
-<span class="cstat-no" title="statement not covered" >		 this.addr = addr;</span>
-<span class="cstat-no" title="statement not covered" >        _.extend(this, Backbone.Events);</span>
-<span class="cstat-no" title="statement not covered" >  		 var self = this;</span>
-  
+	websocket: <span class="fstat-no" title="function not covered" >function(model,addr){</span>
+<span class="cstat-no" title="statement not covered" >		var socket;</span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >        if (typeof(WebSocket) !== 'undefined') {</span>
 <span class="cstat-no" title="statement not covered" >          console.log("Using a standard websocket");</span>
-<span class="cstat-no" title="statement not covered" >          self.socket = new WebSocket(this.addr);</span>
+<span class="cstat-no" title="statement not covered" >          socket = new WebSocket(addr);</span>
         } else <span class="cstat-no" title="statement not covered" >if (typeof(MozWebSocket) !== 'undefined') {</span>
 <span class="cstat-no" title="statement not covered" >          console.log("Using MozWebSocket");</span>
-<span class="cstat-no" title="statement not covered" >          self.socket = new MozWebSocket(this.addr);</span>
+<span class="cstat-no" title="statement not covered" >          socket = new MozWebSocket(addr);</span>
         } else {
 <span class="cstat-no" title="statement not covered" >          alert("Your browser does not support web sockets. No stats for you!");</span>
         }
       
-<span class="cstat-no" title="statement not covered" >        self.socket.onopen = <span class="fstat-no" title="function not covered" >function (e) {</span></span>
-<span class="cstat-no" title="statement not covered" >          self.trigger('socket_open', e);</span>
+<span class="cstat-no" title="statement not covered" >        socket.onopen = <span class="fstat-no" title="function not covered" >function (e) {</span></span>
+<span class="cstat-no" title="statement not covered" >          model.trigger('socket_open', e);</span>
         };
-<span class="cstat-no" title="statement not covered" >        self.socket.onmessage = <span class="fstat-no" title="function not covered" >function (e) {</span></span>
-<span class="cstat-no" title="statement not covered" >          self.trigger('socket_message', JSON.parse(e.data));</span>
+<span class="cstat-no" title="statement not covered" >        socket.onmessage = <span class="fstat-no" title="function not covered" >function (e) {</span></span>
+<span class="cstat-no" title="statement not covered" >          model.trigger('socket_message', JSON.parse(e.data));</span>
         };
       
-<span class="cstat-no" title="statement not covered" >        self.socket.onclose = <span class="fstat-no" title="function not covered" >function (e) {</span></span>
-<span class="cstat-no" title="statement not covered" >          self.trigger('socket_close', e);</span>
+<span class="cstat-no" title="statement not covered" >        socket.onclose = <span class="fstat-no" title="function not covered" >function (e) {</span></span>
+<span class="cstat-no" title="statement not covered" >          model.trigger('socket_close', e);</span>
         };
-<span class="cstat-no" title="statement not covered" >        self.socket.onerror = <span class="fstat-no" title="function not covered" >function (e) {</span></span>
-<span class="cstat-no" title="statement not covered" >          self.trigger('socket_error', e);</span>
+<span class="cstat-no" title="statement not covered" >        socket.onerror = <span class="fstat-no" title="function not covered" >function (e) {</span></span>
+<span class="cstat-no" title="statement not covered" >          model.trigger('socket_error', e);</span>
         };
-<span class="cstat-no" title="statement not covered" >        return this;</span>
+<span class="cstat-no" title="statement not covered" >        return socket;</span>
 	}
 &nbsp;
 };
@@ -329,7 +323,7 @@ Sensnet.Factories.Connection = {
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jan 02 2015 14:44:48 GMT+0100 (W. Europe Standard Time)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jan 07 2015 00:31:24 GMT+0100 (W. Europe Standard Time)</div>
 </div>
 
 <script src="../prettify.js"></script>
