@@ -1,0 +1,81 @@
+{
+  "title": "Sensnet Websocket Msg Schema",
+  "description": "This file is used to decide if the websocket message received is correct",
+  "id": "/",
+  "type": "object",
+  "properties": {
+    "oneOf":[
+		{
+			"id": "onInitMsg",
+			"type": "object",
+			"properties": {
+				"event":   { "$ref": "#/definitions/event" },
+				"devices": { "$ref": "#/definitions/devices" }
+			}
+		},
+		{
+			"id": "onDeviceChangeMsg",
+			"type": "object",
+			"properties": {
+				"event":   { "$ref": "#/definitions/event" },
+				"device": { "$ref": "#/definitions/device" }
+			}
+		},
+		{
+			"id": "onSensorChangeMsg",
+			"type": "object",
+			"properties": {
+				"event":   { "$ref": "#/definitions/event" },
+				"mac":   { "$ref": "#/definitions/mac" },
+				"sensor": { "$ref": "#/definitions/sensor" }
+			}
+		}
+	]
+  },
+  "definitions": {
+    "event": {
+      "id": "event",
+      "type": "string"
+    },
+    "devices": {
+      "id": "devices",
+      "type": "array",
+      "items": { "$ref": "#/definitions/device" }
+	},
+	"device": {
+	  "id": "device",
+	  "type": "object",
+	  "properties": {
+		  "mac": {
+			"id": "mac",
+			"type": "string"
+		  },
+		  "sensors": {
+			"id": "sensors",
+			"type": "array",
+			"items": { "$ref": "#/definitions/sensor" }
+		  },
+		  "required": [ "mac", "sensors"]
+	   }
+	},
+    "sensor":{
+		"id": "sensor",
+		"type": "object",
+		"properties": {
+		  "type": {
+			"id": "type",
+			"type": "string"
+		  },
+		  "value": {
+			"id": "value",
+			"type": "string"
+		  },
+		  "port": {
+			"id": "port",
+			"type": "integer"
+		  },
+		  "required": ["type","value","port"]
+		}
+	}
+  }
+}
