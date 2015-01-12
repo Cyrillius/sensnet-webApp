@@ -3,32 +3,34 @@
 /*
 *     -----{ Sensnet Grunt Configuration  }----
 *
-*   Description: This file is used to generate the sensnet.js and sensnet.min.js used after into the website
-*                It's also used to generate the documentation.
+*   Description: This file is used to automated some tasks
 *
-*   Usage:       - grunt dev:      will generate the files in development format
-*                - grunt release:  will generate  the files in production format 
-*                - grunt doc:      will generate the documentation
+*   Usage:       - grunt dev:             will generate the files in development format
+*                - grunt release:         will generate  the files in production format 
+*                - grunt doc:             will generate the documentation
+*                - grunt style:           will generate the style of the website
+*                - grunt test:            will test the javascript application
+*                - grunt bower-concat:    will generate bower.js and bower.css it's the css and the js files of the libraries
+*                - grunt watching:        will generate the documentation
 *
 *                More Info here: http://gruntjs.com/
 *
 *   Author:      Cyril Praz
-*   Date:        16.12.2014
+*   Date:        10.01.2015
 */
 
 
 /**
-* @TODO Here I have big problem of dependency I need to have  a solution to handle dependencies maybe maybe browserify with commonJS
+* @TODO Here I have problem of dependency I need to have  a solution to handle dependencies maybe browserify with commonJS
 *
 */
 
 var sensnet_App            = ['js/src/*.js'];
 var sensnet_Views          = ['js/src/views/vWelcome.js', 'js/src/views/*.js'];
-var sensnet_Collections    = ['js/src/collections/cSensors.js', 'js/src/collections/cDevices.js', 'js/src/collections/cServers.js']; //to be sure we don't have any dependency problem
 var sensnet_Factories      = ['js/src/factories/*.js'];
-var sensnet_Models         = ['js/src/models/*.js'];
+var sensnet_ModCol         = ['js/src/models/mSensor.js', 'js/src/collections/cSensors.js', 'js/src/models/mDevice.js', 'js/src/collections/cDevices.js', 'js/src/models/mServer.js', 'js/src/collections/cServers.js'];
 
-sensnet_App = sensnet_App.concat(sensnet_Models, sensnet_Collections, sensnet_Views, sensnet_Factories );
+sensnet_App = sensnet_App.concat(sensnet_ModCol, sensnet_Views, sensnet_Factories );
 
 
 

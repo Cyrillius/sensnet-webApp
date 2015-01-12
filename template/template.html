@@ -14,12 +14,12 @@
 <div id="sensnetTemplate">
 	<!--Welcome View template -->
 	<script id="welcome-template" type="text/template">
-		<p>Bienvenue sur l'interface graphique de Sensnet!<p>
+		<p>Bienvenue sur l' interface graphique de Sensnet!<p>
 		<p>Pour commencer à utliser veuillez ajouter un serveur:<p>
 		<div id="inner-welcome"></div>
 	</script>
 
-	<!--Tree node template -->
+	<!--Tree template -->
 	<script id="tree-template" type="text/template">
 		<ul class="tree home">
     		<li class="display home ">Home<span></span></li>
@@ -28,100 +28,108 @@
     		<li class="display server-add">Add Server<span></span></li>
   		</ul>
 	</script>
+
+	<!--Tree node template -->
 	<script id="node-template" type="text/template">
 		<li class = "display <%= model %> "><%= name %><span></span></li>
 	</script>
+
+	<!--The server form template -->
 	<script id="server-profile" type="text/template">
-	<form  class="form-horizontal" role="form">
 		<div class="col-sm-3">
 	        <div class="form-group"><label class="col-sm-5 control-label">Name </label><div id="server-form" class=""><input id="serverName" name="name" type="text" class="form-control" value="<%= name %>"/></div></div>
 	        <div class="form-group"><label class="col-sm-5 control-label">Ip   </label><div class=""><input id="serverIp" name="ip" type="text" class="form-control" value="<%= ip %>"/></div></div>
 	        <div class="form-group"><label class="col-sm-5 control-label">Port </label><div class=""><input id="serverPort" name="port" type="text" class="form-control" value="<%= port %>"/></div></div>
 	        <button class="save btn" type="button" value="Save">Save</button></p>
 		</div>
-	</form>
 	</script>
+
+	<!-- the server table template -->
 	<script id="server-table" type="text/template">
-	<table class="table table-responsive server-table">  		        	
-			<caption><%= name %></caption>										
-		    <tbody>																				
-		        <tr>																			
-		            <td class="table-col1"></td>												
-		            <td class="table-col2">IP adress</td>										
-		            <td class="table-col3"><%= ip %></td>						
-		            <td class="table-col4"></td>												
-		        </tr>																			
-		        <tr>																			
-		            <td class="table-col1"></td>												
-		            <td class="table-col2">Port</td>											
-		            <td class="table-col3"><%= port %></td>					
-		            <td class="table-col4"></td>												
-		        </tr>																			
-		        <tr>																			
-		            <td class="table-col1"></td>												
-		            <td class="table-col2">Status</td>											
-		            <td class="table-col3"><%= status %></td>					
-		            <td class="table-col4"></td>												
-		        </tr>																			
-		       	<tr>																			
-		            <td class="table-col1"></td>												
-		            <td class="table-col2">Nb Device</td>										
-		            <td class="table-col3"><%= devices.length %></td>							
-		            <td class="table-col4"></td>												
-		        </tr>																		
-		    </tbody>																			
-	</table>
-	<button type="button" class="btn btn-danger delete-server">Delete</button>
+		<table class="table table-responsive server-table">  		        	
+				<caption><%= name %></caption>										
+			    <tbody>																				
+			        <tr>																			
+			            <td class="table-col1"></td>												
+			            <td class="table-col2">IP adress</td>										
+			            <td class="table-col3"><%= ip %></td>						
+			            <td class="table-col4"></td>												
+			        </tr>																			
+			        <tr>																			
+			            <td class="table-col1"></td>												
+			            <td class="table-col2">Port</td>											
+			            <td class="table-col3"><%= port %></td>					
+			            <td class="table-col4"></td>												
+			        </tr>																			
+			        <tr>																			
+			            <td class="table-col1"></td>												
+			            <td class="table-col2">Status</td>											
+			            <td class="table-col3"><%= status %></td>					
+			            <td class="table-col4"></td>												
+			        </tr>																			
+			       	<tr>																			
+			            <td class="table-col1"></td>												
+			            <td class="table-col2">Nb Device</td>										
+			            <td class="table-col3"><%= devices.length %></td>							
+			            <td class="table-col4"></td>												
+			        </tr>																		
+			    </tbody>																			
+		</table>
+		<button type="button" class="btn btn-danger delete-server">Delete</button>
 	</script>
+
+	<!-- the device table template -->
 	<script id="device-table" type="text/template">
-	<table class="table table-responsive server-table">  		        	
-			<caption><%= name %></caption>										
-		    <tbody>																				
-		        <tr>																			
-		            <td class="table-col1"></td>												
-		            <td class="table-col2">Mac adress</td>										
-		            <td class="table-col3"><%= mac %></td>						
-		            <td class="table-col4"></td>												
-		        </tr>																																					
-		       	<tr>																			
-		            <td class="table-col1"></td>												
-		            <td class="table-col2">Nb Sensors</td>										
-		            <td class="table-col3"><%= sensors.length %></td>							
-		            <td class="table-col4"></td>												
-		        </tr>																		
-		    </tbody>																			
-	</table>
+		<table class="table table-responsive server-table">  		        	
+				<caption><%= name %></caption>										
+			    <tbody>																				
+			        <tr>																			
+			            <td class="table-col1"></td>												
+			            <td class="table-col2">Mac adress</td>										
+			            <td class="table-col3"><%= mac %></td>						
+			            <td class="table-col4"></td>												
+			        </tr>																																					
+			       	<tr>																			
+			            <td class="table-col1"></td>												
+			            <td class="table-col2">Nb Sensors</td>										
+			            <td class="table-col3"><%= sensors.length %></td>							
+			            <td class="table-col4"></td>												
+			        </tr>																		
+			    </tbody>																			
+		</table>
 	</script>
+
+	<!-- the sensor table template -->
 	<script id="sensor-table" type="text/template">
-	<table class="table table-responsive server-table">  		        	
-			<caption><%= name %></caption>										
-		    <tbody>																																						
-		        <tr>																			
-		            <td class="table-col1"></td>												
-		            <td class="table-col2">Port</td>											
-		            <td class="table-col3"><%= port %></td>					
-		            <td class="table-col4"></td>												
-		        </tr>																			
-		        <tr>																			
-		            <td class="table-col1"></td>												
-		            <td class="table-col2">Type</td>											
-		            <td class="table-col3"><%= type %></td>					
-		            <td class="table-col4"></td>												
-		        </tr>																			
-		       	<tr>																			
-		            <td class="table-col1"></td>												
-		            <td class="table-col2">Value</td>										
-		            <td class="table-col3"><%= value %></td>							
-		            <td class="table-col4"></td>												
-		        </tr>	
-		       	<tr>																			
-		            <td class="table-col1"></td>												
-		            <td class="table-col2">Unit</td>										
-		            <td class="table-col3"><%= unit %></td>							
-		            <td class="table-col4"></td>												
-		        </tr>																	
-		    </tbody>																			
-	</table>
+		<table class="table table-responsive server-table">  		        	
+				<caption><%= name %></caption>										
+			    <tbody>																																						
+			        <tr>																			
+			            <td class="table-col1"></td>												
+			            <td class="table-col2">Port</td>											
+			            <td class="table-col3"><%= port %></td>					
+			            <td class="table-col4"></td>												
+			        </tr>																			
+			        <tr>																			
+			            <td class="table-col1"></td>												
+			            <td class="table-col2">Type</td>											
+			            <td class="table-col3"><%= type %></td>					
+			            <td class="table-col4"></td>												
+			        </tr>																			
+			       	<tr>																			
+			            <td class="table-col1"></td>												
+			            <td class="table-col2">Value</td>										
+			            <td class="table-col3"><%= value %></td>							
+			            <td class="table-col4"></td>												
+			        </tr>	
+			       	<tr>																			
+			            <td class="table-col1"></td>												
+			            <td class="table-col2">Unit</td>										
+			            <td class="table-col3"><%= unit %></td>							
+			            <td class="table-col4"></td>												
+			        </tr>																	
+			    </tbody>																			
+		</table>
 	</script>
 </div>
 

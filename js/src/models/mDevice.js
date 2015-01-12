@@ -15,20 +15,30 @@
         * @return null
         */
         initialize: function(){
-          this.set({deviceId: this.cid,model: "device"});
+          this.set({deviceId: this.cid});
+
           this.set({name: 'Device '+this.get('deviceId')});
+          
           var sensors = this.get("sensors");
-          if (sensors){
-          	 var col = new Sensnet.Collections.SensorCollection(sensors);
-             this.set({"sensors" : col});
-             
+          if(sensors === null || sensors === undefined){
+             var coll = new Sensnet.Collections.SensorCollection();
+             this.set({"sensors" : coll});
           }
 
+          sensors = this.get("sensors");
+          if( !(sensors instanceof Sensnet.Collections.SensorCollection)){
+            var col = new Sensnet.Collections.SensorCollection(sensors);
+            this.set({"sensors" : col});
+          }
+          
+
         },
+
+
         // add some default attribute to a Device model
         defaults: {
-            mac: '',       // the bluetooth MAC of the device
-            sensors:[]     // a list of sensors provided by the device
+            mac: '',              // the bluetooth MAC of the device
+            model: "device"       // used into the html template
         },
 
         /**

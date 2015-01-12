@@ -14,7 +14,7 @@
         * @return null
         */
         initialize: function(){
-          this.set({sensorId: this.cid,model: "sensor"});
+          this.set({sensorId: this.cid});
           this.set({name: 'Sensor '+this.get('sensorId')});
         },
 
@@ -23,7 +23,8 @@
             type: '',              // the type of sensor (motion,temperature,humidity)
             port: '',              // the port on the nrf board
             value: 0,              // the value sended by the sensor
-            unit:'unknow'          // the unity of the value
+            unit:'unknow',          // the unity of the value
+            model: "sensor"       // used into the html template
         },
         
         /**

@@ -29,7 +29,9 @@
      * @return null
      */
     welcome: function() {
-    	Sensnet.app.body.displayWelcome(); 
+    	var welcomeView = Sensnet.Factories.Home.welcomeBody();
+        Sensnet.app.body.show(welcomeView);
+        welcomeView.innerWelcome.show(Sensnet.Factories.Server.addServerForm());    
     },
     
     /**
@@ -40,8 +42,8 @@
      * @return null
      */
     home: function() {
-    	Sensnet.app.body.displayHome(); 
-    	Sensnet.app.tree.displayTree();
+    	Sensnet.app.body.show(Sensnet.Factories.Home.homeBody());
+    	Sensnet.app.tree.show(Sensnet.Factories.Home.homeSide());
     },
     
     /**
@@ -52,7 +54,7 @@
      * @return null
      */
     addServer: function() { 
-    	Sensnet.app.tree.displayTree();
+    	Sensnet.app.tree.show(Sensnet.Factories.Home.homeSide());
     	var addServerBody = Sensnet.Factories.Server.addServerForm();
     	Sensnet.app.body.show(addServerBody);
     },
@@ -65,7 +67,7 @@
      * @return null
      */
     server: function(serverId) {
-    	Sensnet.app.tree.displayTree();
+    	Sensnet.app.tree.show(Sensnet.Factories.Home.homeSide());
     	var serverBody = Sensnet.Factories.Server.serverBody(serverId);
     	Sensnet.app.body.show(serverBody);
     	
@@ -81,7 +83,7 @@
      */
     device: function(serverId, deviceId) {
     	console.log("navigate to the device! Bitch!");
-    	Sensnet.app.tree.displayTree();
+    	Sensnet.app.tree.show(Sensnet.Factories.Home.homeSide());
     	var deviceBody = Sensnet.Factories.Device.deviceBody(serverId, deviceId);
     	Sensnet.app.body.show(deviceBody);
     	
@@ -95,7 +97,7 @@
      * @return null
      */
     sensor: function(serverId, deviceId, sensorId) {
-     	Sensnet.app.tree.displayTree();
+     	Sensnet.app.tree.show(Sensnet.Factories.Home.homeSide());
     	var sensorBody = Sensnet.Factories.Sensor.sensorBody(serverId, deviceId, sensorId);
     	Sensnet.app.body.show(sensorBody);  	
     },  
@@ -108,7 +110,7 @@
      * @return null
      */
     servers: function() {
-    	Sensnet.app.tree.displayTree();
+    	Sensnet.app.tree.show(Sensnet.Factories.Home.homeSide());
     	var serversBody = Sensnet.Factories.Server.serversBody();
     	Sensnet.app.body.show(serversBody);
     	
@@ -123,7 +125,7 @@
      * @return null
      */
     devices: function(serverId) {
-    	Sensnet.app.tree.displayTree();
+    	Sensnet.app.tree.show(Sensnet.Factories.Home.homeSide());
     	var devicesBody = Sensnet.Factories.Device.devicesBody(serverId);
     	Sensnet.app.body.show(devicesBody);
     	
@@ -137,7 +139,7 @@
      * @return null
      */
     sensors: function(serverId, deviceId) {
-     	Sensnet.app.tree.displayTree();
+     	Sensnet.app.tree.show(Sensnet.Factories.Home.homeSide());
     	var sensorsBody = Sensnet.Factories.Sensor.sensorsBody(serverId, deviceId);
     	Sensnet.app.body.show(sensorsBody);  	
     }  

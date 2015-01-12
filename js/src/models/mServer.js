@@ -15,23 +15,36 @@
         * @return null
         */
         initialize: function(){
-          this.set({serverId: this.cid,model: "server"});
-          this.set({name: 'Server '+this.get('serverId')});
+          this.set({serverId: this.cid});
+          // verify if a name exist and if not create one
+          var name = this.get("name");
+          if(!name){
+            this.set({name: 'Server '+this.get('serverId')});
+          }
+
+          // verify if a lis of device exist and if not create one
           var devices = this.get("devices");
-          if (!devices){
-          	var coll = new Sensnet.Collections.DeviceCollection(devices);
+          if (devices === null || devices === undefined){
+          	var coll = new Sensnet.Collections.DeviceCollection();
             this.set("devices",coll);
           }
+
+          devices = this.get("devices");
+          if( !(devices instanceof Sensnet.Collections.DeviceCollection)){
+            var col = new Sensnet.Collections.DeviceCollection(devices);
+            this.set({"devices" : col});
+          }
+             
+          //set the url
           this.setUrl('server/'+this.get('serverId'));
         },
 
         // add some default attribute to a server model
         defaults: {
-        	name: 'Server',         // the name of the server 
             ip: '127.0.0.1',        // the ip adress of the server
             port: '8080',           // the ip port of the server
             status: "unknow",       // the state of the server ("unknow","connected","disconnected")
-
+            model: "server"         // used into the html template
         },
         
         /**
@@ -128,8 +141,7 @@
 				// onInit Event: initialize the website
 				case "onInit":
 					console.log(data);
-					var col = new Sensnet.Collections.DeviceCollection(data.devices);
-					this.set("devices",col);
+                    this.set({"devices" : new Sensnet.Collections.DeviceCollection(data.devices)});
 					this.setUrl('server/'+this.get('serverId'));
 				break;
 

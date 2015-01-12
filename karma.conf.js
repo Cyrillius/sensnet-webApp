@@ -34,7 +34,8 @@ module.exports = function(config) {
     // optionally, configure the reporter
     coverageReporter: {
       type : 'html',
-      dir : 'tests/coverage/'
+      dir : 'tests',
+      subdir: 'coverage'
     },
     htmlReporter: {
       outputDir: 'tests/testsResult',
