@@ -129,8 +129,7 @@ module.exports = function(grunt) {
          'bootstrap'
         ],
         mainFiles: {
-          'jgrowl': ['jquery.jgrowl.min.js', 'jquery.jgrowl.min.css'],
-		  'amanda': ['amanda.min.js']
+          'jgrowl': ['jquery.jgrowl.min.js', 'jquery.jgrowl.min.css']
         }
       }
     },

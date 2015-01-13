@@ -18,13 +18,15 @@
           this.set({deviceId: this.cid});
 
           this.set({name: 'Device '+this.get('deviceId')});
-          
+        
+          // verify if a list of sensors exist and if not create one
           var sensors = this.get("sensors");
           if(sensors === null || sensors === undefined){
              var coll = new Sensnet.Collections.SensorCollection();
              this.set({"sensors" : coll});
           }
 
+          //verify if sensors is a sensor collection if not we assume it's a JSON and we initialize a device collection with this JSON
           sensors = this.get("sensors");
           if( !(sensors instanceof Sensnet.Collections.SensorCollection)){
             var col = new Sensnet.Collections.SensorCollection(sensors);

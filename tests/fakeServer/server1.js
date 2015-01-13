@@ -130,6 +130,30 @@ var updateSensorMsg = function (id,port){
 	return msg;
 };
 
+// test value send  when there is an update
+var invalidMsg = function (){
+    var msg = {
+    "events":"onDeviceChange",
+    "device": 
+         {
+            "mac": "55: 44: 33: 22: 10",
+            "sensors": [
+                {
+                    "type": "temperature",
+                    "value": Math.random()*30,
+                    "port": 0
+                },
+                {
+                    "type": "motion",
+                    "value": Math.round(Math.random()),
+                    "port": 1
+                }
+            ]
+        }
+    };
+    return msg;
+};
+
 var updateSensor = function() {
 
 	
@@ -205,6 +229,9 @@ process.stdin.on('data', function (text) {
     }
     if (text === 'send onSensorChange\r\n' || text === 'send onSensorChange\n') {
       server.sendMessage("all", JSON.stringify(updateSensorMsg(0,0)));
+    }
+    if (text === 'send invalid\r\n' || text === 'send invalid\n') {
+      server.sendMessage("all", JSON.stringify(invalidMsg()));
     }
 
 });

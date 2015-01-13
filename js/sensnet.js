@@ -17,7 +17,7 @@
 *      #  #  #        #        #  #  #  #         ##   # ##   #    # ##   #       #    
 *      #  #   ##   ###          ##    ##          ##    # #  ###    # #  ###   ###     
 *                                                                                      
-* sensnet.js  V0.1  (2015-01-11, 17:56)       
+* sensnet.js  V0.1  (2015-01-13, 01:48)       
 *                                                                                      
 * Cyril Praz                                                                           
 */
@@ -66,6 +66,16 @@ Sensnet.app.addInitializer(function(){
     var $d = $(document);
     var servers = new Sensnet.Collections.ServerCollection();
     Sensnet.app.servers=servers;
+
+    // create new  TV4 environment
+    Sensnet.app.tv4 = tv4;
+
+    // register a schema 
+    $.getJSON( "schema/sensnet.schema.json", function( json ) {
+      console.log("Get the JSON schema");
+      console.log(json);
+      Sensnet.app.tv4.addSchema('sensnet',json);
+    });
     
 });
 
@@ -432,13 +442,15 @@ Sensnet.Test.onInitMsg=onInitMsg;
           this.set({deviceId: this.cid});
 
           this.set({name: 'Device '+this.get('deviceId')});
-          
+        
+          // verify if a list of sensors exist and if not create one
           var sensors = this.get("sensors");
           if(sensors === null || sensors === undefined){
              var coll = new Sensnet.Collections.SensorCollection();
              this.set({"sensors" : coll});
           }
 
+          //verify if sensors is a sensor collection if not we assume it's a JSON and we initialize a device collection with this JSON
           sensors = this.get("sensors");
           if( !(sensors instanceof Sensnet.Collections.SensorCollection)){
             var col = new Sensnet.Collections.SensorCollection(sensors);
@@ -532,14 +544,14 @@ Sensnet.Test.onInitMsg=onInitMsg;
             this.set({name: 'Server '+this.get('serverId')});
           }
 
-          // verify if a lis of device exist and if not create one
+          // verify if a list of device exist and if not create one
           var devices = this.get("devices");
           if (devices === null || devices === undefined){
           	var coll = new Sensnet.Collections.DeviceCollection();
             this.set("devices",coll);
           }
 
-          devices = this.get("devices");
+          //verify if devices is a device collection if not we assume it's a JSON and we initialize a device collection with this JSON
           if( !(devices instanceof Sensnet.Collections.DeviceCollection)){
             var col = new Sensnet.Collections.DeviceCollection(devices);
             this.set({"devices" : col});
@@ -587,7 +599,7 @@ Sensnet.Test.onInitMsg=onInitMsg;
         },
 
         /**
-        * this method is initiakize a websocket connection
+        * this method initialize a websocket connection
         * @memberof Server
         * @param null
         * @return null
@@ -646,41 +658,57 @@ Sensnet.Test.onInitMsg=onInitMsg;
         * @return attr a JSON object representing the Device object
         */
         socketMessage: function(data){
-			switch(data.event){
 
-				// onInit Event: initialize the website
-				case "onInit":
-					console.log(data);
-                    this.set({"devices" : new Sensnet.Collections.DeviceCollection(data.devices)});
-					this.setUrl('server/'+this.get('serverId'));
-				break;
+            //perform validation
+            var valid = Sensnet.app.tv4.validate(data, Sensnet.app.tv4.getSchema('sensnet'));
 
-				// onDeviceChange Event: update a device
-				case "onDeviceChange":
-					console.log(data);
-					var d = this.get('devices').where({mac: data.device.mac});
-					if(d.length >=1){
-						d[0].set( {mac: data.device.mac});
-						var s = d[0].get('sensors').models;
-						if(s.length >=2){
-							s[0].set(data.device.sensors[0]);
-							s[1].set(data.device.sensors[1]);
-						}
-					}		
-				break;
+            //if the message is invalid
+            if(!valid){
+              console.log("the message received is invalid!");
+              console.log(Sensnet.app.tv4.error);
+              console.log(data);
+              this.stream.send(Sensnet.app.tv4.error);
+            }
 
-				//onSensorChange Event: update a sensor
-				case "onSensorChange":
-					console.log(data);
-					var e = this.get('devices').where({mac: data.mac});
-					if(e.length >=1){
-						var t = e[0].get('sensors').where({port:data.sensor.port});
-						if (t.length >=1){
-							t[0].set(data.sensor);
-						}
-					}
-				break;
-			}
+            //if the message is valid
+            else{
+
+    			switch(data.event){
+
+    				// onInit Event: initialize the website
+    				case "onInit":
+    					console.log(data);
+                        this.set({"devices" : new Sensnet.Collections.DeviceCollection(data.devices)});
+    					this.setUrl('server/'+this.get('serverId'));
+    				break;
+
+    				// onDeviceChange Event: update a device
+    				case "onDeviceChange":
+    					console.log(data);
+    					var d = this.get('devices').where({mac: data.device.mac});
+    					if(d.length >=1){
+    						d[0].set( {mac: data.device.mac});
+    						var s = d[0].get('sensors').models;
+    						if(s.length >=2){
+    							s[0].set(data.device.sensors[0]);
+    							s[1].set(data.device.sensors[1]);
+    						}
+    					}		
+    				break;
+
+    				//onSensorChange Event: update a sensor
+    				case "onSensorChange":
+    					console.log(data);
+    					var e = this.get('devices').where({mac: data.mac});
+    					if(e.length >=1){
+    						var t = e[0].get('sensors').where({port:data.sensor.port});
+    						if (t.length >=1){
+    							t[0].set(data.sensor);
+    						}
+    					}
+    				break;
+    			}
+            }
 		}
           
 

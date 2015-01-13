@@ -42,6 +42,16 @@ Sensnet.app.addInitializer(function(){
     var $d = $(document);
     var servers = new Sensnet.Collections.ServerCollection();
     Sensnet.app.servers=servers;
+
+    // create new  TV4 environment
+    Sensnet.app.tv4 = tv4;
+
+    // register a schema 
+    $.getJSON( "schema/sensnet.schema.json", function( json ) {
+      console.log("Get the JSON schema");
+      console.log(json);
+      Sensnet.app.tv4.addSchema('sensnet',json);
+    });
     
 });
 
