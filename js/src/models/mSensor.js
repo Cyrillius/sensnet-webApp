@@ -15,7 +15,7 @@
         */
         initialize: function(){
           this.set({sensorId: this.cid});
-          this.set({name: 'Sensor '+this.get('sensorId')});
+          this.set({name: 'Sensor '+this.get('port')});
         },
 
         // add some default attribute to a Device model

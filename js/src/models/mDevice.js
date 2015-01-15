@@ -17,7 +17,7 @@
         initialize: function(){
           this.set({deviceId: this.cid});
 
-          this.set({name: 'Device '+this.get('deviceId')});
+          this.set({name: this.get('mac')});
         
           // verify if a list of sensors exist and if not create one
           var sensors = this.get("sensors");

@@ -5010,6 +5010,9 @@ body {
   border-right: 1px solid #eee;
   font: 11px Arial, Helvetica, sans-serif;
 }
+.tree {
+  padding-left: 20px;
+}
 .server-table {
   border-collapse: separate;
   border-spacing: 0 5px;

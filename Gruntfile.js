@@ -6,12 +6,12 @@
 *   Description: This file is used to automated some tasks
 *
 *   Usage:       - grunt dev:             will generate the files in development format
-*                - grunt release:         will generate  the files in production format 
+*                - grunt prod:         will generate  the files in production format 
 *                - grunt doc:             will generate the documentation
 *                - grunt style:           will generate the style of the website
 *                - grunt test:            will test the javascript application
 *                - grunt bower-concat:    will generate bower.js and bower.css it's the css and the js files of the libraries
-*                - grunt watching:        will generate the documentation
+*                - grunt watching:        will watch if a file change and execute the task we need
 *
 *                More Info here: http://gruntjs.com/
 *
@@ -21,8 +21,8 @@
 
 
 /**
+*  Specify in wich order concatenate the files
 * @TODO Here I have problem of dependency I need to have  a solution to handle dependencies maybe browserify with commonJS
-*
 */
 
 var sensnet_App            = ['js/src/*.js'];
@@ -37,7 +37,10 @@ sensnet_App = sensnet_App.concat(sensnet_ModCol, sensnet_Views, sensnet_Factorie
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    version: "V0.1",
+    //version of the application
+    version: "V0.3",
+
+    //banner of our sensnet.js
     banner: '/*                                                                         ᕦ(ò_ó*)ᕤ    \n'+
             '*      ┗(＾0＾)┓             ##                                                          \n'+
             '*                        #  #                                 #                        \n'+
@@ -61,6 +64,7 @@ module.exports = function(grunt) {
             '*                                                                                      \n'+
             '* Cyril Praz                                                                           \n'+
             '*/\n                                                                                   \n',
+    // configuration of paths
     dirs:{
       "css":"css",
       "less":"less",
@@ -72,7 +76,8 @@ module.exports = function(grunt) {
         "less":"<%= dirs.less %>/bootstrap"    
       },
     },
-
+    
+    // paths of source files
     src:{
       "output":{
         "sensnet":{
@@ -96,6 +101,11 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    /**
+    * TASK CONCAT 
+    * bring together all the js source files 
+    */
     concat: {
       options: {
         banner: "<%= banner %>",
@@ -106,6 +116,11 @@ module.exports = function(grunt) {
         dest: '<%= src.output.sensnet.js %>'// la destination finale
       },
     },
+
+    /**
+    * TASK JSDOC
+    * generate the documentation
+    */
 	  jsdoc: {
       dist : {
         src: "<%= src.input.sensnet.doc %>", 
@@ -116,6 +131,11 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    /**
+    * TASK BOWER_CONCAT
+    * bring together all library js files and css files
+    */    
     bower_concat: {
       all: {
         dest: '<%= src.output.bower.js %>',
@@ -133,10 +153,15 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    /**
+    * TASK LESS
+    * compile less source file
+    */  
     less: {
       development: {
         options: {
-          compress: false,  //minifying the result
+          compress: false,  //not minifying the result
           paths: ["bower_components/bootstrap/less","less"]
         },
         files: {
@@ -153,27 +178,52 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    /**
+    * TASK UGLIFY
+    * comppress sensnet.js and bower.js
+    */  
     uglify: { 
-      options: {
-        report: 'gzip',
-        banner: '<%= banner %>'
+      sensnet:{
+        options: {
+          banner: '<%= banner %>'
+        },
+        files: {
+          '<%= src.output.sensnet.jsmin %>': ['<%= src.output.sensnet.js %>']
+        } 
       },
-      files: {
-        '<%= src.output.sensnet.jsmin %>': '<%= src.output.sensnet.js %>',
-        '<%= src.output.bower.js %>': '<%= src.output.bower.js %>'
-      } 
+      bower:{
+        files: {
+          '<%= src.output.bower.js %>': ['<%= src.output.bower.js %>']
+        } 
+      }
     },
+
+    /**
+    * TASK KARMA
+    * run test procedure
+    */  
     karma: {
       development: {
         configFile: 'karma.conf.js',
         options: {
           files: ['<%= src.output.bower.js %>'].concat(['<%= src.input.sensnet.js %>','<%= src.input.sensnet.spec %>'])
         }
-      },
+      }
     },
+
+    /**
+    * TASK JSHINT
+    * check if javascript source files are valid
+    */  
     jshint: {
       beforeconcat: "<%= src.input.sensnet.js %>",
     },
+
+    /**
+    * TASK WATCH
+    * when a file is modified execute a task
+    */ 
     watch: {
       w_concat: {
         files: '<%= src.input.sensnet.js %>',
@@ -205,9 +255,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   
-  // grunt dev
+  //register tasks 
   grunt.registerTask('dev', ['jshint','concat']);
-  grunt.registerTask('prod', ['jshint','concat','jsdoc']);
+  grunt.registerTask('prod', ['jshint','concat','jsdoc','uglify']);
   grunt.registerTask('doc', ['jsdoc']);
   grunt.registerTask('style', ['less']);
   grunt.registerTask('bower-concat', ['bower_concat']);

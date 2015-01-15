@@ -17,7 +17,7 @@
 *      #  #  #        #        #  #  #  #         ##   # ##   #    # ##   #       #    
 *      #  #   ##   ###          ##    ##          ##    # #  ###    # #  ###   ###     
 *                                                                                      
-* sensnet.js  V0.1  (2015-01-13, 01:48)       
+* sensnet.js  V0.3  (2015-01-15, 06:52)       
 *                                                                                      
 * Cyril Praz                                                                           
 */
@@ -361,7 +361,7 @@ Sensnet.Test.onInitMsg=onInitMsg;
         */
         initialize: function(){
           this.set({sensorId: this.cid});
-          this.set({name: 'Sensor '+this.get('sensorId')});
+          this.set({name: 'Sensor '+this.get('port')});
         },
 
         // add some default attribute to a Device model
@@ -441,7 +441,7 @@ Sensnet.Test.onInitMsg=onInitMsg;
         initialize: function(){
           this.set({deviceId: this.cid});
 
-          this.set({name: 'Device '+this.get('deviceId')});
+          this.set({name: this.get('mac')});
         
           // verify if a list of sensors exist and if not create one
           var sensors = this.get("sensors");
@@ -544,6 +544,11 @@ Sensnet.Test.onInitMsg=onInitMsg;
             this.set({name: 'Server '+this.get('serverId')});
           }
 
+          //verify if the port is common http
+          if(window.location.protocol == "http:"){
+             this.set({port: 80});
+          }
+
           // verify if a list of device exist and if not create one
           var devices = this.get("devices");
           if (devices === null || devices === undefined){
@@ -563,10 +568,10 @@ Sensnet.Test.onInitMsg=onInitMsg;
 
         // add some default attribute to a server model
         defaults: {
-            ip: '127.0.0.1',        // the ip adress of the server
-            port: '8080',           // the ip port of the server
-            status: "unknow",       // the state of the server ("unknow","connected","disconnected")
-            model: "server"         // used into the html template
+            ip: document.location.hostname ,         // the ip adress of the server
+            port: document.location.port ,           // the ip port of the server
+            status: "unknow",                        // the state of the server ("unknow","connected","disconnected")
+            model: "server"                          // used into the html template
         },
         
         /**

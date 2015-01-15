@@ -22,6 +22,11 @@
             this.set({name: 'Server '+this.get('serverId')});
           }
 
+          //verify if the port is common http
+          if(window.location.protocol == "http:"){
+             this.set({port: 80});
+          }
+
           // verify if a list of device exist and if not create one
           var devices = this.get("devices");
           if (devices === null || devices === undefined){
@@ -41,10 +46,10 @@
 
         // add some default attribute to a server model
         defaults: {
-            ip: '127.0.0.1',        // the ip adress of the server
-            port: '8080',           // the ip port of the server
-            status: "unknow",       // the state of the server ("unknow","connected","disconnected")
-            model: "server"         // used into the html template
+            ip: document.location.hostname ,         // the ip adress of the server
+            port: document.location.port ,           // the ip port of the server
+            status: "unknow",                        // the state of the server ("unknow","connected","disconnected")
+            model: "server"                          // used into the html template
         },
         
         /**
