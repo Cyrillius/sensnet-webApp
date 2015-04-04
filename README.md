@@ -9,29 +9,9 @@
   This application used a websocket connection to communicate with a central Unit over internet and handle the events boadcasted by the system and display it in a webpage. 
 
 
-  __Project Master:__
-
-  - Medard Rieder
-
-
-  __Contributor:__
-
-  - Patrice Rudaz
-  - Emilie Gsponer
-
-
-  __Students:__
-
-  - Lucien Aymon 
-  - Samantha Niyoyita
-  - Yann Maret
-  - Cyril Praz
-
 
 ### Library Used
 
- |          Name               |          URL                     |       Description                                     |
- | :-------------------------- | :------------------------------- | :--------------------------------------------------   |
  |    twitter bootstrap        |   http://getbootstrap.com        |   html, css and js framework                          |
  |    jquery                   |   http://jquery.com              |   javascript library to modify the DOM                |
  |    backbone                 |   http://backbonejs.org/         |   javascipt framework to work with model              |
@@ -53,7 +33,7 @@
   1. Clone the repository :  
 
   ```bash
-  git clone https://cyrillius@bitbucket.org/cyrillius/sensnet.git 
+  git clone https://github.com/Cyrillius/sensnet-webapp.git
   ```
 
   2. Select the development branch (if you want to contribute)
